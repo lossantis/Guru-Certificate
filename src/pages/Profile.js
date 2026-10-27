@@ -135,14 +135,6 @@ const ExamTypeStatValue = styled.span`
   font-size: var(--font-size-lg);
 `;
 
-const TopicsSection = styled.div`
-  background: var(--aws-white);
-  border-radius: var(--radius-xl);
-  padding: var(--spacing-6);
-  box-shadow: var(--shadow-md);
-  margin-bottom: var(--spacing-6);
-`;
-
 const TopicsList = styled.div`
   display: flex;
   flex-direction: column;
@@ -360,6 +352,7 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   // Só um simulado aberto por vez; null = todos fechados.
   const [openExamId, setOpenExamId] = useState(null);
+  const [topicsOpen, setTopicsOpen] = useState(false);
   const [statistics, setStatistics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -491,11 +484,19 @@ const Profile = () => {
             </ExamTypeSection>
 
             {statistics.topicsToReview.length > 0 && (
-              <TopicsSection>
-                <SectionTitle>Assuntos para Revisar (Geral)</SectionTitle>
-                <p style={{ color: 'var(--aws-gray-600)', marginBottom: 'var(--spacing-4)' }}>
-                  Estes são os assuntos que você mais errou em todos os simulados. Foque neles para melhorar seu desempenho!
-                </p>
+              <Accordion
+                id="topics-to-review"
+                isOpen={topicsOpen}
+                onToggle={() => setTopicsOpen(open => !open)}
+                header={(
+                  <div>
+                    <SectionTitle style={{ margin: 0 }}>Assuntos para Revisar (Geral)</SectionTitle>
+                    <p style={{ color: 'var(--aws-gray-600)', margin: 'var(--spacing-2) 0 0 0' }}>
+                      Estes são os assuntos que você mais errou em todos os simulados. Foque neles para melhorar seu desempenho!
+                    </p>
+                  </div>
+                )}
+              >
                 <TopicsList>
                   {statistics.topicsToReview.map((item, index) => (
                     <TopicItem key={index}>
@@ -504,7 +505,7 @@ const Profile = () => {
                     </TopicItem>
                   ))}
                 </TopicsList>
-              </TopicsSection>
+              </Accordion>
             )}
 
             {statistics.detailedResults && statistics.detailedResults.length > 0 && (
@@ -529,7 +530,7 @@ const Profile = () => {
                       <ExamHeader>
                         <div>
                           <ExamTitle>
-                            Simulado {index + 1}: {getExamTypeName(result.examType)}
+                            Simulado {statistics.detailedResults.length - index}: {getExamTypeName(result.examType)}
                           </ExamTitle>
                           <ExamDate>{formatDate(result.timestamp)}</ExamDate>
                         </div>
