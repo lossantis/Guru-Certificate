@@ -5,8 +5,12 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CloudPractitioner from './CloudPractitioner';
 import CloudPractitionerDomainSession from './CloudPractitionerDomainSession';
 import { cloudPractitionerQuestions } from '../../data/cloudPractitionerQuestions';
+import { createCloudPractitionerExam } from '../../data/cloudPractitionerExam';
 
 jest.mock('../../components/ExamProtection', () => ({ children }) => children);
+jest.mock('../../data/cloudPractitionerExam', () => ({
+  createCloudPractitionerExam: jest.fn()
+}));
 
 const originalQuestions = cloudPractitionerQuestions.slice();
 
@@ -78,6 +82,7 @@ beforeEach(() => {
     singleQuestion,
     multipleQuestion
   );
+  createCloudPractitionerExam.mockReturnValue([singleQuestion, multipleQuestion]);
 });
 
 afterEach(() => {

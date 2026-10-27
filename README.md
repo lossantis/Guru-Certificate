@@ -17,7 +17,7 @@ Plataforma de preparação para certificações AWS com simulados, flashcards e 
 
 | Trilha | Referência da trilha | Questões na plataforma | Tempo limite |
 | --- | --- | --- | --- |
-| Cloud Practitioner | CLF-C02 | 134 | 90 minutos |
+| Cloud Practitioner | CLF-C02 | 65 por tentativa (134 disponíveis) | 90 minutos |
 | Solutions Architect Associate | SAA-C03 | 20 | 40 minutos |
 | Developer Associate | DVA-C02 | 20 | 40 minutos |
 
@@ -27,6 +27,7 @@ Os bancos de questões abordam cenários de uso de serviços AWS. Os simulados o
 - Contagem regressiva e encerramento ao esgotar o tempo.
 - Navegação entre questões, exigindo selecionar e confirmar respostas múltiplas antes de avançar.
 - Questões de resposta única usam seleção simples e feedback imediato; questões múltiplas permitem marcar várias alternativas e exigem confirmação.
+- Cada tentativa de Cloud Practitioner sorteia 65 questões entre os domínios de acordo com a quantidade configurada para cada um; a ordem das questões também é aleatória.
 - Validação de questões múltiplas exige selecionar exatamente o conjunto de alternativas corretas.
 - Feedback com indicação de todas as respostas corretas e explicações relevantes.
 - Bloqueio da resposta após seleção única ou confirmação da resposta múltipla.

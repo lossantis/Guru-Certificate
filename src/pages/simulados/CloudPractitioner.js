@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { cloudPractitionerQuestions } from '../../data/cloudPractitionerQuestions';
+import { createCloudPractitionerExam } from '../../data/cloudPractitionerExam';
 import ExamProtection from '../../components/ExamProtection';
 import { getCurrentUser, saveExamResult } from '../../services/userService';
 
@@ -283,6 +283,7 @@ const ModalContent = styled.div`
 
 const CloudPractitioner = () => {
   const navigate = useNavigate();
+  const [examQuestions] = useState(() => createCloudPractitionerExam());
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [answeredQuestions, setAnsweredQuestions] = useState({});
@@ -312,7 +313,7 @@ const CloudPractitioner = () => {
   const handleAnswerSelect = (questionIndex, answerIndex) => {
     if (lockedQuestions[questionIndex]) return;
 
-    const question = cloudPractitionerQuestions[questionIndex];
+    const question = examQuestions[questionIndex];
     if (question.multiple) {
       setSelectedAnswers(prev => {
         const selected = Array.isArray(prev[questionIndex]) ? prev[questionIndex] : [];
@@ -337,7 +338,7 @@ const CloudPractitioner = () => {
   };
 
   const checkAnswer = (questionIndex, selectedAnswer) => {
-    const question = cloudPractitionerQuestions[questionIndex];
+    const question = examQuestions[questionIndex];
     const correctAnswers = question.alternatives.reduce(
       (indices, alternative, index) => alternative.correct ? [...indices, index] : indices,
       []
@@ -363,7 +364,7 @@ const CloudPractitioner = () => {
     if (selected.length === 0 || !lockedQuestions[currentQuestion]) {
       setModalContent({
         title: 'Atenção',
-        message: cloudPractitionerQuestions[currentQuestion].multiple
+        message: examQuestions[currentQuestion].multiple
           ? 'Selecione e confirme sua resposta antes de continuar.'
           : 'Por favor, selecione uma resposta antes de continuar.',
         type: 'warning'
@@ -372,7 +373,7 @@ const CloudPractitioner = () => {
       return;
     }
 
-    if (currentQuestion < cloudPractitionerQuestions.length - 1) {
+    if (currentQuestion < examQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
       finishExam();
@@ -387,7 +388,7 @@ const CloudPractitioner = () => {
 
   const finishExam = useCallback(() => {
     const correctAnswers = Object.values(answeredQuestions).filter(Boolean).length;
-    const totalQuestions = cloudPractitionerQuestions.length;
+    const totalQuestions = examQuestions.length;
     const percentage = (correctAnswers / totalQuestions) * 100;
     const passed = percentage >= 70;
 
@@ -395,7 +396,7 @@ const CloudPractitioner = () => {
     const wrongQuestionIds = [];
     const topics = new Set();
 
-    cloudPractitionerQuestions.forEach((question, questionIndex) => {
+    examQuestions.forEach((question, questionIndex) => {
       if (!answeredQuestions[questionIndex]) {
         wrongQuestionIds.push(question.id);
 
@@ -429,7 +430,7 @@ const CloudPractitioner = () => {
     }
     
     setIsFinished(true);
-  }, [answeredQuestions]);
+  }, [answeredQuestions, examQuestions]);
 
   // Timer effect
   useEffect(() => {
@@ -487,7 +488,7 @@ const CloudPractitioner = () => {
     );
   }
 
-  const currentQ = cloudPractitionerQuestions[currentQuestion];
+  const currentQ = examQuestions[currentQuestion];
   const selectedAnswerIndices = getSelectedAnswerIndices(currentQuestion);
   const hasSelectedAnswers = selectedAnswerIndices.length > 0;
   const isAnswered = Boolean(lockedQuestions[currentQuestion]);
@@ -504,7 +505,7 @@ const CloudPractitioner = () => {
         <Content>
         <Header>
           <QuestionCounter>
-            {currentQuestion + 1} / {cloudPractitionerQuestions.length}
+            {currentQuestion + 1} / {examQuestions.length}
           </QuestionCounter>
           <Timer>
             ⏱️ {formatTime(timeLeft)}
@@ -638,7 +639,7 @@ const CloudPractitioner = () => {
             onClick={nextQuestion}
             disabled={!hasSelectedAnswers || !isLocked}
           >
-            {currentQuestion === cloudPractitionerQuestions.length - 1 ? 'Finalizar' : 'Próxima →'}
+            {currentQuestion === examQuestions.length - 1 ? 'Finalizar' : 'Próxima →'}
           </Button>
           
           <Button 

@@ -145,7 +145,9 @@ const CloudPractitionerDomains = () => {
                     <WeightBadge>{domain.weight} da prova</WeightBadge>
                   </DomainTitleRow>
                   <DomainDescription>{domain.description['pt-BR']}</DomainDescription>
-                  <QuestionCountTag>{count} questões disponíveis</QuestionCountTag>
+                  <QuestionCountTag>
+                    {domain.questionCount} questões no simulado · {count} disponíveis para praticar
+                  </QuestionCountTag>
                 </DomainInfo>
                 <PracticeButton to={`/simulado/cloud-practitioner/dominio/${domain.slug}`}>
                   Praticar Domínio

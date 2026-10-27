@@ -3,6 +3,7 @@ export const cloudPractitionerDomains = [
   {
     slug: 'cloud-concepts',
     weight: '24%',
+    questionCount: 16,
     name: { 'pt-BR': 'Conceitos de Nuvem', en: 'Cloud Concepts' },
     description: {
       'pt-BR': 'Benefícios da nuvem AWS, princípios de design, estratégias de migração e economia da nuvem.',
@@ -12,6 +13,7 @@ export const cloudPractitionerDomains = [
   {
     slug: 'security-compliance',
     weight: '30%',
+    questionCount: 19,
     name: { 'pt-BR': 'Segurança e Conformidade', en: 'Security and Compliance' },
     description: {
       'pt-BR': 'Modelo de responsabilidade compartilhada, governança, gerenciamento de acesso (IAM) e recursos de segurança.',
@@ -21,6 +23,7 @@ export const cloudPractitionerDomains = [
   {
     slug: 'cloud-technology-services',
     weight: '34%',
+    questionCount: 22,
     name: { 'pt-BR': 'Tecnologia e Serviços na Nuvem', en: 'Cloud Technology and Services' },
     description: {
       'pt-BR': 'Métodos de implantação, infraestrutura global e os principais serviços de computação, armazenamento, banco de dados e rede.',
@@ -30,6 +33,7 @@ export const cloudPractitionerDomains = [
   {
     slug: 'billing-pricing-support',
     weight: '12%',
+    questionCount: 8,
     name: { 'pt-BR': 'Faturamento, Precificação e Suporte', en: 'Billing, Pricing, and Support' },
     description: {
       'pt-BR': 'Modelos de precificação, ferramentas de gerenciamento de custos e planos de suporte da AWS.',
