@@ -17,7 +17,7 @@ Plataforma de preparação para certificações AWS com simulados, flashcards e 
 
 | Trilha | Referência da trilha | Questões na plataforma | Tempo limite |
 | --- | --- | --- | --- |
-| Cloud Practitioner | CLF-C02 | 65 | 90 minutos |
+| Cloud Practitioner | CLF-C02 | 134 | 90 minutos |
 | Solutions Architect Associate | SAA-C03 | 20 | 40 minutos |
 | Developer Associate | DVA-C02 | 20 | 40 minutos |
 
@@ -25,9 +25,11 @@ Os bancos de questões abordam cenários de uso de serviços AWS. Os simulados o
 
 - Alternância entre português e inglês.
 - Contagem regressiva e encerramento ao esgotar o tempo.
-- Navegação entre questões, com resposta obrigatória para avançar.
-- Feedback imediato, indicação da alternativa correta e explicações.
-- Bloqueio da resposta após a seleção.
+- Navegação entre questões, exigindo selecionar e confirmar respostas múltiplas antes de avançar.
+- Questões de resposta única usam seleção simples e feedback imediato; questões múltiplas permitem marcar várias alternativas e exigem confirmação.
+- Validação de questões múltiplas exige selecionar exatamente o conjunto de alternativas corretas.
+- Feedback com indicação de todas as respostas corretas e explicações relevantes.
+- Bloqueio da resposta após seleção única ou confirmação da resposta múltipla.
 - Resultado final com percentual de acertos; o critério interno de aprovação é 70%.
 - Registro do resultado no perfil quando há um usuário conectado.
 - Restrições de interação implementadas pelo componente `ExamProtection`.
@@ -45,7 +47,7 @@ Além do simulado completo, é possível estudar as questões de cada domínio s
 | Tecnologia e Serviços na Nuvem | 34% |
 | Faturamento, Precificação e Suporte | 12% |
 
-A prática utiliza as questões do banco de Cloud Practitioner filtradas pelo domínio, com alternância de idioma, feedback imediato, resumo de acertos e opção de reiniciar. Essas sessões não possuem cronômetro e não são registradas no histórico ou no ranking.
+A prática utiliza as questões do banco de Cloud Practitioner filtradas pelo domínio, com alternância de idioma, feedback imediato para respostas únicas e confirmação para respostas múltiplas, resumo de acertos e opção de reiniciar. Essas sessões não possuem cronômetro e não são registradas no histórico ou no ranking.
 
 ## Flashcards
 

@@ -117,6 +117,9 @@ test('no simulado completo, confirma todas as opções corretas antes de avança
   fireEvent.click(screen.getByRole('button', { name: 'Confirmar resposta' }));
 
   expect(screen.getByText('✓ Correto!')).toBeInTheDocument();
+  expect(screen.getByText(/Respostas corretas:/)).toHaveTextContent(
+    'Resposta múltipla correta A; Resposta múltipla correta B'
+  );
   expect(nextButton).toBeEnabled();
   fireEvent.click(nextButton);
   expect(screen.getByText('Você acertou 2 de 2 questões')).toBeInTheDocument();
@@ -144,7 +147,7 @@ test('na sessão por domínio, permite múltiplas seleções e confirma a respos
 
   const checkboxes = screen.getAllByRole('checkbox');
   expect(checkboxes).toHaveLength(3);
-  const nextButton = screen.getByRole('button', { name: 'Próxima →' });
+  const nextButton = screen.getByRole('button', { name: 'Finalizar' });
   expect(nextButton).toBeDisabled();
   fireEvent.click(checkboxes[0]);
   fireEvent.click(checkboxes[2]);
@@ -152,6 +155,9 @@ test('na sessão por domínio, permite múltiplas seleções e confirma a respos
 
   fireEvent.click(screen.getByRole('button', { name: 'Confirmar resposta' }));
   expect(screen.getByText('✓ Correto!')).toBeInTheDocument();
+  expect(screen.getByText(/Respostas corretas:/)).toHaveTextContent(
+    'Resposta múltipla correta A; Resposta múltipla correta B'
+  );
   fireEvent.click(screen.getByRole('button', { name: 'Finalizar' }));
   expect(screen.getByText('Você acertou 2 de 2 questões (100.0%)')).toBeInTheDocument();
 });
