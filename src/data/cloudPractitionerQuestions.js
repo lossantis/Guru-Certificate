@@ -1198,8 +1198,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Nessa estratégia só existem backups; toda a infraestrutura precisa ser recriada e os dados restaurados após o desastre. Não há um núcleo mínimo já em execução, por isso o RTO é o mais alto.",
-          "en": "In this strategy only backups exist; the entire infrastructure must be recreated and data restored after the disaster. There is no minimal core already running, so RTO is the highest."
+          "pt-BR": "Nessa estratégia só existem backups; toda a infraestrutura precisa ser recriada e os dados restaurados após o desastre. Não há um núcleo mínimo já em execução, por isso o RTO é o mais alto. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha.",
+          "en": "In this strategy only backups exist; the entire infrastructure must be recreated and data restored after the disaster. There is no minimal core already running, so RTO is the highest. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure."
         }
       },
       {
@@ -1231,8 +1231,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Active/active mantém ambientes em escala total atendendo tráfego em mais de um local ao mesmo tempo. Tem o menor RTO, mas é a estratégia mais cara, o oposto de uma cópia mínima.",
-          "en": "Active/active keeps full-scale environments serving traffic in more than one location at the same time. It has the lowest RTO, but it is the most expensive strategy, the opposite of a minimal copy."
+          "pt-BR": "Active/active mantém ambientes em escala total atendendo tráfego em mais de um local ao mesmo tempo. Tem o menor RTO, mas é a estratégia mais cara, o oposto de uma cópia mínima. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha.",
+          "en": "Active/active keeps full-scale environments serving traffic in more than one location at the same time. It has the lowest RTO, but it is the most expensive strategy, the opposite of a minimal copy. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure."
         }
       }
     ],
@@ -2186,8 +2186,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Backup e restauração não mantém ambiente em execução; os recursos são recriados a partir dos backups após o desastre. O RTO costuma ser de horas, não de poucos minutos.",
-          "en": "Backup and restore does not keep a running environment; resources are recreated from backups after the disaster. The RTO is usually hours, not a few minutes."
+          "pt-BR": "Backup e restauração não mantém ambiente em execução; os recursos são recriados a partir dos backups após o desastre. O RTO costuma ser de horas, não de poucos minutos. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha.",
+          "en": "Backup and restore does not keep a running environment; resources are recreated from backups after the disaster. The RTO is usually hours, not a few minutes. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure."
         }
       },
       {
@@ -2203,8 +2203,8 @@ export const cloudPractitionerQuestions = [
       }
     ],
     "explanation": {
-      "pt-BR": "Warm standby mantém uma cópia reduzida e funcional do ambiente sempre em execução, equilibrando custo e RTO baixo.",
-      "en": "Warm standby keeps a scaled-down, functional copy of the environment always running, balancing cost and a low RTO."
+      "pt-BR": "Warm standby mantém uma cópia reduzida e funcional do ambiente sempre em execução, equilibrando custo e RTO baixo. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha; RPO (Recovery Point Objective, objetivo de ponto de recuperação) é a quantidade máxima de dados, medida em tempo, que se aceita perder (por exemplo, RPO de 5 minutos significa perder no máximo os últimos 5 minutos de dados).",
+      "en": "Warm standby keeps a scaled-down, functional copy of the environment always running, balancing cost and a low RTO. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure; RPO (Recovery Point Objective) is the maximum amount of data, measured in time, that you accept losing (for example, an RPO of 5 minutes means losing at most the last 5 minutes of data)."
     }
   },
   {
@@ -2233,8 +2233,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "No warm standby a região de recuperação roda em capacidade reduzida e precisa ser escalada e receber o failover. Isso gera um RTO de minutos, e a região secundária não atende a produção simultaneamente.",
-          "en": "In warm standby the recovery region runs at reduced capacity and must be scaled up and receive the failover. This produces an RTO of minutes, and the secondary region does not serve production simultaneously."
+          "pt-BR": "No warm standby a região de recuperação roda em capacidade reduzida e precisa ser escalada e receber o failover. Isso gera um RTO de minutos, e a região secundária não atende a produção simultaneamente. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha.",
+          "en": "In warm standby the recovery region runs at reduced capacity and must be scaled up and receive the failover. This produces an RTO of minutes, and the secondary region does not serve production simultaneously. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure."
         }
       },
       {
@@ -2244,8 +2244,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "No pilot light apenas os dados ficam replicados e os servidores de aplicação precisam ser iniciados durante o desastre. O RTO é maior e não há atendimento simultâneo em duas regiões.",
-          "en": "In pilot light only the data is replicated, and the application servers must be started during the disaster. The RTO is higher, and there is no simultaneous serving from two regions."
+          "pt-BR": "No pilot light apenas os dados ficam replicados e os servidores de aplicação precisam ser iniciados durante o desastre. O RTO é maior e não há atendimento simultâneo em duas regiões. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha.",
+          "en": "In pilot light only the data is replicated, and the application servers must be started during the disaster. The RTO is higher, and there is no simultaneous serving from two regions. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure."
         }
       },
       {
@@ -2255,8 +2255,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Backup e restauração é a estratégia mais barata, mas o RPO depende da frequência dos backups e o RTO costuma ser de horas. Não atende a requisitos próximos de zero.",
-          "en": "Backup and restore is the cheapest strategy, but the RPO depends on backup frequency and the RTO is usually hours. It does not meet near-zero requirements."
+          "pt-BR": "Backup e restauração é a estratégia mais barata, mas o RPO depende da frequência dos backups e o RTO costuma ser de horas. Não atende a requisitos próximos de zero. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha. RPO (Recovery Point Objective, objetivo de ponto de recuperação) é a quantidade máxima de dados, medida em tempo, que se aceita perder.",
+          "en": "Backup and restore is the cheapest strategy, but the RPO depends on backup frequency and the RTO is usually hours. It does not meet near-zero requirements. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure. RPO (Recovery Point Objective) is the maximum amount of data, measured in time, that you accept losing."
         }
       },
       {
@@ -2266,14 +2266,14 @@ export const cloudPractitionerQuestions = [
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "No multi-site ativo/ativo a carga roda em capacidade total em várias regiões ao mesmo tempo. Se uma região falha, o tráfego segue nas demais, oferecendo o menor RTO e RPO, com o maior custo.",
-          "en": "In multi-site active/active the workload runs at full capacity in multiple regions at the same time. If one region fails, traffic continues in the others, providing the lowest RTO and RPO, at the highest cost."
+          "pt-BR": "No multi-site ativo/ativo a carga roda em capacidade total em várias regiões ao mesmo tempo. Se uma região falha, o tráfego segue nas demais, oferecendo o menor RTO e RPO, com o maior custo. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha; RPO (Recovery Point Objective, objetivo de ponto de recuperação) é a quantidade máxima de dados, medida em tempo, que se aceita perder (por exemplo, RPO de 5 minutos significa perder no máximo os últimos 5 minutos de dados).",
+          "en": "In multi-site active/active the workload runs at full capacity in multiple regions at the same time. If one region fails, traffic continues in the others, providing the lowest RTO and RPO, at the highest cost. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure; RPO (Recovery Point Objective) is the maximum amount of data, measured in time, that you accept losing (for example, an RPO of 5 minutes means losing at most the last 5 minutes of data)."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "Multi-site ativo/ativo é a estratégia de DR com menor RTO e RPO, pois várias regiões atendem produção ao mesmo tempo.",
-      "en": "Multi-site active/active is the DR strategy with the lowest RTO and RPO, because multiple regions serve production at the same time."
+      "pt-BR": "Multi-site ativo/ativo é a estratégia de recuperação de desastres (DR) com menor RTO e RPO, pois várias regiões atendem produção ao mesmo tempo, sem etapa de failover nem perda relevante de dados. RTO (Recovery Time Objective, objetivo de tempo de recuperação) é o tempo máximo aceitável para restaurar o serviço após uma falha; RPO (Recovery Point Objective, objetivo de ponto de recuperação) é a quantidade máxima de dados, medida em tempo, que se aceita perder (por exemplo, RPO de 5 minutos significa perder no máximo os últimos 5 minutos de dados).",
+      "en": "Multi-site active/active is the disaster recovery (DR) strategy with the lowest RTO and RPO, because multiple regions serve production at the same time, with no failover step and no meaningful data loss. RTO (Recovery Time Objective) is the maximum acceptable time to restore service after a failure; RPO (Recovery Point Objective) is the maximum amount of data, measured in time, that you accept losing (for example, an RPO of 5 minutes means losing at most the last 5 minutes of data)."
     }
   },
   {
