@@ -32,3 +32,19 @@ test('resultado pendente rejeitado como inválido é descartado e não bloqueia 
   await expect(getUserResults('student')).resolves.toEqual([]);
   expect(JSON.parse(localStorage.getItem('guru_certificate_pending_results'))).toEqual([]);
 });
+
+test('resultado recém-enviado rejeitado como inválido é propagado, sem ficar na fila', async () => {
+  fetch.mockImplementationOnce(() => ok({ user: { id: 'student', username: 'Estudante' }, token: 'session-token' }));
+  await registerUser('Estudante', 'student@example.com', 'senha123');
+  fetch.mockImplementationOnce(() => Promise.resolve({ ok: false, status: 400, json: async () => ({ message: 'Resultado inválido' }) }));
+  await expect(saveExamResult('student', 'cloud-practitioner', { correct: 1, total: 134 })).rejects.toThrow('Resultado inválido');
+  expect(JSON.parse(localStorage.getItem('guru_certificate_pending_results'))).toEqual([]);
+});
+
+test('usa o id informado para que reenvios do mesmo resultado sejam idempotentes', async () => {
+  fetch.mockImplementationOnce(() => ok({ user: { id: 'student', username: 'Estudante' }, token: 'session-token' }));
+  await registerUser('Estudante', 'student@example.com', 'senha123');
+  fetch.mockImplementationOnce(() => ok({ id: 'attempt-1' }));
+  await saveExamResult('student', 'cloud-practitioner', { id: 'attempt-1', correct: 1, total: 65 });
+  expect(JSON.parse(fetch.mock.calls[1][1].body).id).toBe('attempt-1');
+});

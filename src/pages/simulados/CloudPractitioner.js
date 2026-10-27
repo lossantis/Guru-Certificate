@@ -21,6 +21,15 @@ const loadSavedExam = () => {
   }
 };
 
+// O armazenamento pode estar cheio ou bloqueado; a tentativa continua em memória nesse caso.
+const safeStorage = action => {
+  try {
+    action();
+  } catch {
+    // Sem persistência, o simulado segue funcionando, apenas sem retomada após recarregar.
+  }
+};
+
 const SimuladoContainer = styled.div`
   min-height: calc(100vh - 160px);
   padding: var(--spacing-6) 0;
@@ -335,6 +344,7 @@ const CloudPractitioner = () => {
   const navigate = useNavigate();
   const [saved] = useState(loadSavedExam);
   const [examQuestions] = useState(() => saved?.questions ?? createCloudPractitionerExam());
+  const [attemptId] = useState(() => saved?.attemptId ?? `cp-${Date.now()}-${Math.random().toString(36).slice(2)}`);
   const [deadline] = useState(() => saved?.deadline ?? Date.now() + EXAM_DURATION_SECONDS * 1000);
   const [currentQuestion, setCurrentQuestion] = useState(() => Math.min(saved?.currentQuestion ?? 0, examQuestions.length - 1));
   const [selectedAnswers, setSelectedAnswers] = useState(saved?.selectedAnswers ?? {});
@@ -488,18 +498,19 @@ const CloudPractitioner = () => {
     const currentUser = getCurrentUser();
     if (currentUser) {
       setSaveStatus('Salvando resultado...');
-      saveExamResult(currentUser.id, 'cloud-practitioner', result)
+      saveExamResult(currentUser.id, 'cloud-practitioner', { ...result, id: attemptId })
         .then(() => setSaveStatus('Resultado salvo no ranking.'))
         .catch(error => setSaveStatus(`${error.message} O resultado ficou pendente neste navegador; abra o ranking ou perfil para tentar sincronizar novamente.`));
     }
     
-    localStorage.removeItem(IN_PROGRESS_KEY);
+    safeStorage(() => localStorage.removeItem(IN_PROGRESS_KEY));
     setIsFinished(true);
-  }, [answeredQuestions, lockedQuestions, examQuestions]);
+  }, [answeredQuestions, lockedQuestions, examQuestions, attemptId]);
 
   useEffect(() => {
     if (isFinished) return;
-    localStorage.setItem(IN_PROGRESS_KEY, JSON.stringify({
+    safeStorage(() => localStorage.setItem(IN_PROGRESS_KEY, JSON.stringify({
+      attemptId,
       userId: getCurrentUser()?.id ?? null,
       deadline,
       questionIds: examQuestions.map(question => question.id),
@@ -507,8 +518,8 @@ const CloudPractitioner = () => {
       answeredQuestions,
       lockedQuestions,
       currentQuestion
-    }));
-  }, [isFinished, deadline, examQuestions, selectedAnswers, answeredQuestions, lockedQuestions, currentQuestion]);
+    })));
+  }, [isFinished, attemptId, deadline, examQuestions, selectedAnswers, answeredQuestions, lockedQuestions, currentQuestion]);
 
   // Timer effect
   useEffect(() => {

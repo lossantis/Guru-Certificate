@@ -45,26 +45,31 @@ export const syncPendingResults = async () => {
   const currentUser = getCurrentUser();
   if (!currentUser) return;
   const pending = readLocal(PENDING_KEY, []);
+  const rejected = {};
   for (const result of pending.filter(r => r.userId === currentUser.id)) {
     try {
       await request('/results', { method: 'POST', body: JSON.stringify(result) });
     } catch (error) {
       // Resultado rejeitado como inválido (ex.: tentativa antiga de 134 questões) nunca será aceito; descartar evita bloquear o perfil.
       if (error.status !== 400) throw error;
+      rejected[result.id] = error;
     }
     localStorage.setItem(PENDING_KEY, JSON.stringify(readLocal(PENDING_KEY, []).filter(r => r.id !== result.id)));
   }
+  return rejected;
 };
 
 export const saveExamResult = async (userId, examType, result) => {
   if (getCurrentUser()?.id !== userId) throw new Error('Entre novamente para salvar o resultado');
   const examResult = {
     ...result, userId, examType,
-    id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    id: result.id || `${Date.now()}-${Math.random().toString(36).slice(2)}`,
     wrongQuestions: result.wrongQuestions || [], topics: result.topics || []
   };
   localStorage.setItem(PENDING_KEY, JSON.stringify([...readLocal(PENDING_KEY, []), examResult]));
-  await syncPendingResults();
+  const rejected = await syncPendingResults();
+  // Resultados antigos rejeitados são descartados em silêncio, mas o recém-enviado precisa avisar o usuário.
+  if (rejected[examResult.id]) throw rejected[examResult.id];
   return examResult;
 };
 

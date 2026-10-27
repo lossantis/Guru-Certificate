@@ -303,3 +303,40 @@ test('na última questão, "Finalizar" fica ativo mesmo sem resposta', async () 
   expect(screen.getByText('Você acertou 1 de 2 questões')).toBeInTheDocument();
   await screen.findByText('Resultado salvo no ranking.');
 });
+
+test('se o armazenamento do navegador falhar, o simulado continua e finaliza', async () => {
+  const setItem = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new Error('QuotaExceededError'); });
+  const removeItem = jest.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => { throw new Error('blocked'); });
+  try {
+    renderFullExam();
+    fireEvent.click(screen.getByText('Resposta única correta'));
+    expect(screen.getByText('✓ Correto!')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Finalizar Agora' }));
+    expect(screen.getByText('Você acertou 1 de 2 questões')).toBeInTheDocument();
+    await screen.findByText('Resultado salvo no ranking.');
+  } finally {
+    setItem.mockRestore();
+    removeItem.mockRestore();
+  }
+});
+
+test('duas abas com a mesma tentativa enviam o mesmo id', async () => {
+  const first = renderFullExam();
+  fireEvent.click(screen.getByText('Resposta única correta'));
+  const snapshot = localStorage.getItem('guru_certificate_cloud_exam_in_progress');
+  first.unmount();
+
+  localStorage.setItem('guru_certificate_cloud_exam_in_progress', snapshot);
+  const tabA = renderFullExam();
+  fireEvent.click(screen.getByRole('button', { name: 'Finalizar Agora' }));
+  await screen.findByText('Resultado salvo no ranking.');
+  tabA.unmount();
+
+  localStorage.setItem('guru_certificate_cloud_exam_in_progress', snapshot);
+  renderFullExam();
+  fireEvent.click(screen.getByRole('button', { name: 'Finalizar Agora' }));
+  await screen.findAllByText('Resultado salvo no ranking.');
+
+  expect(saveExamResult).toHaveBeenCalledTimes(2);
+  expect(saveExamResult.mock.calls[0][2].id).toBe(saveExamResult.mock.calls[1][2].id);
+});
