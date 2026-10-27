@@ -17,7 +17,7 @@ async function request(endpoint, options = {}) {
       signal: controller.signal
     });
     const data = await response.json();
-    if (!response.ok) throw new Error(data.message || 'Não foi possível concluir a solicitação');
+    if (!response.ok) throw Object.assign(new Error(data.message || 'Não foi possível concluir a solicitação'), { status: response.status });
     return data;
   } catch (error) {
     if (error.name === 'AbortError' || error instanceof TypeError || error instanceof SyntaxError) {
@@ -46,7 +46,12 @@ export const syncPendingResults = async () => {
   if (!currentUser) return;
   const pending = readLocal(PENDING_KEY, []);
   for (const result of pending.filter(r => r.userId === currentUser.id)) {
-    await request('/results', { method: 'POST', body: JSON.stringify(result) });
+    try {
+      await request('/results', { method: 'POST', body: JSON.stringify(result) });
+    } catch (error) {
+      // Resultado rejeitado como inválido (ex.: tentativa antiga de 134 questões) nunca será aceito; descartar evita bloquear o perfil.
+      if (error.status !== 400) throw error;
+    }
     localStorage.setItem(PENDING_KEY, JSON.stringify(readLocal(PENDING_KEY, []).filter(r => r.id !== result.id)));
   }
 };
