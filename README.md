@@ -233,6 +233,7 @@ src/
 - Taynar Simões.
 - Elizângela Rosa da Silva Costa.
 - Jefferson Bezerra.
+- [Hugo Santos](https://www.linkedin.com/in/hugodesenvolvedor).
 
 ---
 
