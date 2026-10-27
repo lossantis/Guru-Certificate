@@ -94,4 +94,4 @@ npm test -- --watchAll=false --runInBand
 npm run build
 ```
 
-O teste de integração cria um banco temporário e verifica duas contas independentes, ranking público, filtros, melhor nota, rejeição de resultados inválidos (como total de questões incorreto), isolamento do histórico, reenvio sem duplicação, login/logout e persistência após reiniciar o servidor.
+O teste de integração cria um banco temporário e verifica duas contas independentes, ranking público, filtros, melhor nota, ordem do ranking (nota, nome e prova) com empates que não pulam posições, rejeição de resultados inválidos (como total de questões incorreto), isolamento do histórico, reenvio sem duplicação, login/logout e persistência após reiniciar o servidor.

@@ -47,7 +47,7 @@ try {
   await call('/api/results', { ...exam, id:'attempt-2', userId:newcomer.user.id, correct:20 }, newcomer.token);
   assert.deepEqual((await call('/api/ranking')).data.map(r=>[r.username,r.position]), [['novo',1],['estudante',2]]);
   await call('/api/results', { id:'cloud-1', userId:newcomer.user.id, examType:'cloud-practitioner', correct:65, total:65, wrongQuestions:[], topics:[] }, newcomer.token);
-  assert.deepEqual((await call('/api/ranking')).data.map(r=>[r.username,r.examType,r.position]), [['novo','cloud-practitioner',1],['novo','developer-associate',1],['estudante','developer-associate',3]]);
+  assert.deepEqual((await call('/api/ranking')).data.map(r=>[r.username,r.examType,r.position]), [['novo','cloud-practitioner',1],['novo','developer-associate',1],['estudante','developer-associate',2]]);
   assert.equal((await call('/api/results', { ...exam, id:'invalid', correct:21 }, token)).status, 400);
   assert.equal((await call('/api/login', { username:'estudante', password:'errada' })).status, 401);
   const login = await call('/api/login', { username:'estudante', password:'senha123' });

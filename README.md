@@ -70,7 +70,7 @@ O perfil reúne estatísticas gerais e por certificação, assuntos para revisar
 
 O ranking pode ser consultado sem login e tem os filtros **Todos**, **Cloud Practitioner**, **Developer Associate** e **Solutions Architect**. Cada linha é o melhor percentual (`bestPercentage`) de um usuário em uma certificação.
 
-- **Posição:** definida só pelo percentual; usuários com a mesma nota empatam e dividem a posição (1º, 1º, 1º, 4º...).
+- **Posição:** definida só pelo percentual; usuários com a mesma nota empatam e dividem a posição, e a posição seguinte não pula números (1º, 1º, 1º, 2º, 3º...).
 - **Ordem da lista:** maior percentual, depois nome do usuário e, por último, a prova (Cloud Practitioner, Developer Associate e Solutions Architect).
 - **Todos:** mistura todas as provas em uma única classificação por nota. Quem tem resultado em mais de uma prova aparece uma vez por prova, até três vezes; com 100% nas três, empata o primeiro lugar três vezes.
 - **Filtro por prova:** mostra apenas aquela certificação, com as mesmas regras.

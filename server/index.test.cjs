@@ -52,15 +52,15 @@ test('ranking compartilhado, autenticação, filtros e persistência após reini
     await call('/results', exam('new-solutions', 20, 'solutions-architect'), newcomer.token);
     const ana = (await call('/register', { username: 'Ana', email: 'ana@example.com', password: 'senha123' })).data;
     await call('/results', exam('ana-1', 20), ana.token);
-    // Ranking geral: nota, depois nome, depois prova; empates dividem a posição.
+    // Ranking geral: nota, depois nome, depois prova; empates dividem a posição sem pular a seguinte.
     const overall = (await call('/ranking')).data;
     assert.deepEqual(overall.map(r => [r.username, r.examType, r.position]), [
       ['Ana', 'developer-associate', 1],
       ['novo', 'cloud-practitioner', 1],
       ['novo', 'developer-associate', 1],
       ['novo', 'solutions-architect', 1],
-      ['estudante', 'developer-associate', 5],
-      ['estudante', 'cloud-practitioner', 6]
+      ['estudante', 'developer-associate', 2],
+      ['estudante', 'cloud-practitioner', 3]
     ]);
     assert.equal((await call('/results', { ...exam('bad', 22) }, student.token)).status, 400);
     assert.equal((await call('/results', { ...exam('wrong-user', 20), userId: student.user.id }, newcomer.token)).status, 403);
