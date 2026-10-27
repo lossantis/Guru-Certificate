@@ -110,22 +110,37 @@ Os tutoriais incluem dificuldade, tempo estimado, pré-requisitos, orientações
 
 ## Executar localmente
 
-É necessário ter Node.js 22.13 ou superior e npm instalados.
+É necessário ter Node.js 22.13 ou superior e npm (já incluso no Node.js).
+
+### Instalar o Node.js
+
+Use o [nvm](https://github.com/nvm-sh/nvm), que baixa binários oficiais já compilados. Copie o comando de instalação do README do nvm, abra um novo terminal e execute:
+
+```bash
+nvm install --lts
+node -v && npm -v
+```
+
+> **Mac com processador Intel:** evite `brew install node` ou `brew install npm`. O Homebrew não publica mais pacotes pré-compilados para Intel e compila Node.js e suas dependências (LLVM, Rust etc.) a partir do código-fonte, o que pode levar horas. O nvm instala em segundos.
+
+### Instalar e executar
+
+Execute a API e o frontend em dois terminais separados, deixando ambos abertos enquanto usa a aplicação.
 
 ```bash
 git clone https://github.com/skvanderson/Guru-Certificate.git
 cd Guru-Certificate
 npm ci
-npm run server
+npm run server   # terminal 1: API em http://localhost:3001
 ```
 
 Em outro terminal, na mesma pasta:
 
 ```bash
-npm start
+npm start        # terminal 2: frontend em http://localhost:3000
 ```
 
-A aplicação fica disponível em `http://localhost:3000`.
+A aplicação fica disponível em `http://localhost:3000`. Sem a API, os simulados funcionam, mas cadastro, login, perfil e ranking não.
 
 ### Comandos
 
