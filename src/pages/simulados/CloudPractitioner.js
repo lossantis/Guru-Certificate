@@ -203,6 +203,40 @@ const ExplanationBox = styled.div`
 `;
 
 
+const NavBar = styled.div`
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--spacing-4);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+`;
+
+const NavCenter = styled.div`
+  display: flex;
+  gap: var(--spacing-4);
+  justify-content: center;
+  flex-wrap: wrap;
+  grid-column: 2;
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+  }
+`;
+
+const NavEnd = styled.div`
+  grid-column: 3;
+  justify-self: end;
+
+  @media (max-width: 768px) {
+    grid-column: 1;
+    justify-self: center;
+  }
+`;
+
 const Button = styled.button`
   padding: var(--spacing-3) var(--spacing-6);
   border: none;
@@ -616,7 +650,8 @@ const CloudPractitioner = () => {
           )}
         </QuestionCard>
 
-        <div style={{ display: 'flex', gap: 'var(--spacing-4)', justifyContent: 'center', flexWrap: 'wrap' }}>
+        <NavBar>
+          <NavCenter>
           {currentQ.multiple && (
             <Button
               className="secondary"
@@ -641,14 +676,17 @@ const CloudPractitioner = () => {
           >
             {currentQuestion === examQuestions.length - 1 ? 'Finalizar' : 'Próxima →'}
           </Button>
-          
-          <Button 
-            className="danger" 
-            onClick={finishExam}
-          >
-            Finalizar Agora
-          </Button>
-        </div>
+          </NavCenter>
+
+          <NavEnd>
+            <Button 
+              className="danger" 
+              onClick={finishExam}
+            >
+              Finalizar Agora
+            </Button>
+          </NavEnd>
+        </NavBar>
       </Content>
 
       {showModal && (
