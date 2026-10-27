@@ -427,14 +427,18 @@ const CloudPractitioner = () => {
 
     if (currentQuestion < examQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
+      scrollToTop();
     } else {
       finishExam();
     }
   };
 
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
   const previousQuestion = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
+      scrollToTop();
     }
   };
 

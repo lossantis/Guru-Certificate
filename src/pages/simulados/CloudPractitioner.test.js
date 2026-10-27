@@ -239,3 +239,14 @@ test('finalizar limpa o simulado em andamento', () => {
   fireEvent.click(screen.getByRole('button', { name: 'Finalizar Agora' }));
   expect(localStorage.getItem('guru_certificate_cloud_exam_in_progress')).toBeNull();
 });
+
+test('Próxima e Anterior rolam a página para o topo', () => {
+  window.scrollTo = jest.fn();
+  renderFullExam();
+  fireEvent.click(screen.getByText('Resposta única correta'));
+  fireEvent.click(screen.getByRole('button', { name: 'Próxima →' }));
+  expect(window.scrollTo).toHaveBeenCalledTimes(1);
+  fireEvent.click(screen.getByRole('button', { name: '← Anterior' }));
+  expect(window.scrollTo).toHaveBeenCalledTimes(2);
+  expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
+});
