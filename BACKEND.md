@@ -27,7 +27,7 @@ A pasta `sites/` é um checkout separado de publicação e está ignorada pelo G
 
 ## Executar no computador
 
-Requisito: Node.js 22.13 ou superior. Validado com Node.js 22.21.
+Requisito: Node.js 22.13 ou superior. Validado com Node.js 22.21. Para instalar, veja a seção [Instalar o Node.js](README.md#instalar-o-nodejs) do README, que recomenda o `nvm` e alerta sobre o Homebrew em Macs Intel.
 
 ```powershell
 npm ci
@@ -59,7 +59,7 @@ Variáveis de ambiente do servidor:
 | `DATABASE_PATH` | `server/data/guru.sqlite` | Caminho do banco em disco persistente |
 | `ALLOWED_ORIGIN` | não definido | Origem exata do frontend, caso esteja em outro domínio |
 
-O servidor lê as variáveis do ambiente do processo. No PowerShell, por exemplo: `$env:DATABASE_PATH='D:\dados\guru.sqlite'` antes de `npm run server`.
+O servidor lê as variáveis do ambiente do processo. No PowerShell, por exemplo: `$env:DATABASE_PATH='D:\dados\guru.sqlite'` antes de `npm run server`. No macOS ou Linux: `DATABASE_PATH=/dados/guru.sqlite npm run server`.
 
 Há também um `Dockerfile` que compila e serve o projeto:
 
@@ -82,9 +82,9 @@ Contas e resultados da versão antiga continuam nas chaves antigas do navegador,
 
 As contas novas usam hash de senha com salt e scrypt. A API retorna somente os dados públicos da classificação; e-mail, hash e token não aparecem no ranking. O histórico exige uma sessão válida e pertence ao usuário autenticado. A sessão expira em 30 dias e o logout a revoga. O token fica no navegador, portanto mantenha o site protegido contra scripts não confiáveis e use HTTPS.
 
-Se o envio falhar, o resultado fica em uma fila local vinculada à conta. Ao abrir o perfil ou ranking conectado à mesma conta, o envio é tentado novamente, com identificador estável para evitar duplicação. Não limpe os dados do navegador antes de sincronizar.
+Se o envio falhar, o resultado fica em uma fila local vinculada à conta. Ao abrir o perfil ou ranking conectado à mesma conta, o envio é tentado novamente, com identificador estável para evitar duplicação. Se o servidor recusar o resultado com erro 400 (por exemplo, um resultado antigo com total de questões diferente do exigido), ele é descartado da fila, pois nunca seria aceito; falhas de rede e erros de servidor mantêm o resultado na fila. Não limpe os dados do navegador antes de sincronizar.
 
-Os percentuais são recalculados no servidor a partir dos acertos e do total. Este é um ranking de estudo: a contagem de acertos ainda é informada pelo cliente, sem fiscalização de prova ou proteção contra adulteração por um usuário técnico. A aplicação não oferece recuperação de senha nem verificação de e-mail nesta versão.
+Os percentuais são recalculados no servidor a partir dos acertos e do total. O servidor valida o total de questões: 65 no Cloud Practitioner e 20 nas demais certificações; resultados com outro total são rejeitados com a mensagem "Resultado inválido". Este é um ranking de estudo: a contagem de acertos ainda é informada pelo cliente, sem fiscalização de prova ou proteção contra adulteração por um usuário técnico. A aplicação não oferece recuperação de senha nem verificação de e-mail nesta versão.
 
 ## Verificação
 
@@ -94,4 +94,4 @@ npm test -- --watchAll=false --runInBand
 npm run build
 ```
 
-O teste de integração cria um banco temporário e verifica duas contas independentes, ranking público, filtros, melhor nota, rejeição de resultados inválidos, isolamento do histórico, reenvio sem duplicação, login/logout e persistência após reiniciar o servidor.
+O teste de integração cria um banco temporário e verifica duas contas independentes, ranking público, filtros, melhor nota, rejeição de resultados inválidos (como total de questões incorreto), isolamento do histórico, reenvio sem duplicação, login/logout e persistência após reiniciar o servidor.

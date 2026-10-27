@@ -66,7 +66,7 @@ Ao concluir, a sessão mostra a quantidade de cartões em cada avaliação e per
 
 O cadastro valida duplicidade de nome de usuário ou e-mail e exige senha com pelo menos seis caracteres. O login usa nome de usuário e senha; a sessão expira em 30 dias ou no logout.
 
-O perfil reúne histórico de simulados, estatísticas gerais e por certificação, questões erradas e assuntos para revisar.
+O perfil reúne estatísticas gerais e por certificação, assuntos para revisar e a análise de cada simulado, em uma lista expansível (accordion) com um simulado aberto por vez. As estatísticas de erros contam apenas as questões respondidas incorretamente; questões não respondidas reduzem a nota, mas não aparecem como erradas.
 
 O ranking pode ser consultado sem login. A classificação ocorre **dentro de cada certificação**, pelo maior percentual obtido pelo usuário (`bestPercentage`). Em caso de empate, o total acumulado de acertos (`totalCorrect`) é usado como desempate. A visualização geral reúne as trilhas e preserva a posição dentro de cada uma.
 
@@ -157,6 +157,9 @@ npm test
 # Executar todos os testes uma vez, sem modo watch
 npm test -- --watchAll=false
 
+# Executar os testes da API local
+npm run test:server
+
 # Executar apenas os testes do simulado Cloud Practitioner
 npm test -- --watchAll=false --runTestsByPath src/pages/simulados/CloudPractitioner.test.js
 ```
@@ -192,8 +195,21 @@ Nos flashcards, `examType` pode ser `cloud-practitioner`, `solutions-architect` 
 ## Estrutura do projeto
 
 ```text
+.github/copilot-instructions.md
+public/
+├── assets/images/            # imagens e fotos de perfil dos contribuintes
+├── index.html
+└── manifest.json
+server/
+├── index.cjs                 # API local (Node.js + SQLite)
+├── index.test.cjs
+└── cloud/                    # API hospedada (D1), com migrações e testes
+    ├── worker/index.js
+    ├── drizzle/
+    └── scripts/
 src/
 ├── components/
+│   ├── Accordion.js          # seção expansível (aria-expanded)
 │   ├── Header.js
 │   ├── Footer.js
 │   ├── Reveal.js
@@ -201,7 +217,8 @@ src/
 │   └── NavigationButtons.js
 ├── data/
 │   ├── cloudPractitionerQuestions.js
-│   ├── cloudPractitionerDomains.js
+│   ├── cloudPractitionerDomains.js   # domínios, pesos e questões por simulado
+│   ├── cloudPractitionerExam.js      # sorteio das 65 questões por domínio
 │   ├── cloudPractitionerFlashcards.js
 │   ├── developerAssociateQuestions.js
 │   ├── developerAssociateFlashcards.js
@@ -226,11 +243,15 @@ src/
 │       ├── CloudPractitionerDomainSession.js
 │       ├── SolutionsArchitect.js
 │       └── DeveloperAssociate.js
-├── services/userService.js
+├── services/
+│   ├── apiService.js         # chamadas à API e fila de resultados pendentes
+│   └── userService.js        # estatísticas do perfil
 ├── App.js
 ├── index.js
 └── index.css
 ```
+
+Os testes ficam ao lado do código que cobrem, em arquivos `*.test.js`. Também existem `Dockerfile`, `vercel.json` e [BACKEND.md](BACKEND.md) na raiz.
 
 ## Contribuição
 
