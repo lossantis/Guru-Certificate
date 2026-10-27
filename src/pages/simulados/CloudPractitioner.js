@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { createCloudPractitionerExam } from '../../data/cloudPractitionerExam';
@@ -427,18 +427,25 @@ const CloudPractitioner = () => {
 
     if (currentQuestion < examQuestions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
-      scrollToTop();
     } else {
       finishExam();
     }
   };
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Rola só depois de renderizar a nova questão: com rolagem suave iniciada antes,
+  // a mudança de altura da página fazia o navegador terminar mais abaixo.
+  const isFirstRender = useRef(true);
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [currentQuestion]);
 
   const previousQuestion = () => {
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
-      scrollToTop();
     }
   };
 

@@ -252,7 +252,7 @@ test('Próxima e Anterior rolam a página para o topo', () => {
   expect(window.scrollTo).toHaveBeenCalledTimes(1);
   fireEvent.click(screen.getByRole('button', { name: '← Anterior' }));
   expect(window.scrollTo).toHaveBeenCalledTimes(2);
-  expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
+  expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'auto' });
 });
 
 test('resposta única errada mostra a explicação da correta e a da resposta escolhida', () => {
@@ -272,4 +272,14 @@ test('resposta única certa mostra só a explicação da correta', () => {
   expect(screen.getByText('Explicação: Resposta única correta')).toBeInTheDocument();
   expect(screen.queryByText(/A resposta correta é:/)).not.toBeInTheDocument();
   expect(screen.queryByText(/Sua resposta:/)).not.toBeInTheDocument();
+});
+
+test('na sessão por domínio, resposta única errada mostra a explicação da correta e a da escolhida', () => {
+  renderDomainSession();
+  fireEvent.click(screen.getByText('Resposta única incorreta'));
+
+  expect(screen.getByText(/A resposta correta é:/)).toHaveTextContent('Resposta única correta');
+  expect(screen.getByText('Explicação: Resposta única correta')).toBeInTheDocument();
+  expect(screen.getByText(/Sua resposta:/)).toHaveTextContent('Resposta única incorreta');
+  expect(screen.getByText('Explicação: Resposta única incorreta')).toBeInTheDocument();
 });
