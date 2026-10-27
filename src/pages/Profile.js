@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import NavigationButtons from '../components/NavigationButtons';
-import { getCurrentUser, getUserStatistics, logoutUser } from '../services/userService';
+import { getCurrentUser, getUserStatistics, getWrongCount, logoutUser } from '../services/userService';
 import { cloudPractitionerQuestions } from '../data/cloudPractitionerQuestions';
 import { developerAssociateQuestions } from '../data/developerAssociateQuestions';
 import { solutionsArchitectQuestions } from '../data/solutionsArchitectQuestions';
@@ -329,7 +329,7 @@ const formatDate = (dateString) => {
 
 const getPersonalizedAnalysis = (result) => {
   const percentage = result.percentage;
-  const wrongCount = result.total - result.correct;
+  const wrongCount = getWrongCount(result);
   const total = result.total;
   
   let analysis = '';
@@ -547,7 +547,7 @@ const Profile = () => {
                         <SummaryItem>
                           <SummaryLabel>Erros</SummaryLabel>
                           <SummaryValue style={{ color: 'var(--aws-red)' }}>
-                            {result.total - result.correct}/{result.total}
+                            {getWrongCount(result)}/{result.total}
                           </SummaryValue>
                         </SummaryItem>
                         <SummaryItem>

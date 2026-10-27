@@ -1,6 +1,10 @@
 import { getUserResults } from './apiService';
 export { registerUser, loginUser, getCurrentUser, logoutUser, saveExamResult, getRanking, getUserResults } from './apiService';
 
+// Questões não respondidas não contam como erro; sem a lista (resultados legados), usa o restante da nota.
+export const getWrongCount = (result) =>
+  Array.isArray(result.wrongQuestions) ? result.wrongQuestions.length : result.total - result.correct;
+
 export const getUserStatistics = async (userId) => {
   const results = await getUserResults(userId);
   
@@ -39,7 +43,8 @@ export const getUserStatistics = async (userId) => {
   
   sortedResults.forEach(result => {
     totalCorrect += result.correct;
-    totalWrong += (result.total - result.correct);
+    const wrong = getWrongCount(result);
+    totalWrong += wrong;
     totalQuestions += result.total;
     totalPercentage += result.percentage;
     
@@ -47,7 +52,7 @@ export const getUserStatistics = async (userId) => {
     if (byExamType[result.examType]) {
       byExamType[result.examType].exams += 1;
       byExamType[result.examType].correct += result.correct;
-      byExamType[result.examType].wrong += (result.total - result.correct);
+      byExamType[result.examType].wrong += wrong;
     }
     
     // Assuntos para revisar
