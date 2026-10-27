@@ -7053,8 +7053,8 @@ export const cloudPractitionerQuestions = [
       "en": "AWS services and architecture"
     },
     "description": {
-      "pt-BR": "Uma empresa possui licenças baseadas em núcleos físicos e pretende fazer BYOL no EC2. Qual opção usar?",
-      "en": "A company has licenses based on physical cores and plans to use BYOL on EC2. Which option should it use?"
+      "pt-BR": "Uma empresa possui licenças baseadas em núcleos físicos e pretende usar o modelo Bring Your Own License (BYOL, traga sua própria licença) no EC2. Qual opção usar?",
+      "en": "A company has licenses based on physical cores and plans to use the Bring Your Own License (BYOL) model on EC2. Which option should it use?"
     },
     "question": {
       "pt-BR": "",
@@ -7071,8 +7071,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Esta alternativa não atende ao requisito principal do cenário: uma empresa possui licenças baseadas em núcleos físicos e pretende fazer BYOL no EC2. Qual opção usar? A opção correta é mais específica para essa finalidade.",
-          "en": "This option does not meet the scenario's main requirement: A company has licenses based on physical cores and plans to use BYOL on EC2. Which option should it use? The correct option is more specific to this purpose."
+          "pt-BR": "Reserved Instances são um modelo de cobrança (desconto por compromisso de 1 ou 3 anos), não um tipo de tenancy. Elas não dão visibilidade de sockets e núcleos físicos nem afinidade com um servidor, que são necessários para licenças por núcleo físico.",
+          "en": "Reserved Instances are a billing model (1- or 3-year commitment discount), not a tenancy type. They give no visibility into physical sockets and cores or affinity to a server, which per-physical-core licenses require."
         }
       },
       {
@@ -7082,8 +7082,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Esta alternativa não atende ao requisito principal do cenário: uma empresa possui licenças baseadas em núcleos físicos e pretende fazer BYOL no EC2. Qual opção usar? A opção correta é mais específica para essa finalidade.",
-          "en": "This option does not meet the scenario's main requirement: A company has licenses based on physical cores and plans to use BYOL on EC2. Which option should it use? The correct option is more specific to this purpose."
+          "pt-BR": "Com tenancy default, as instâncias rodam em hardware compartilhado com outros clientes e podem mudar de servidor físico. Não há como contar ou fixar núcleos físicos, então não é possível comprovar a conformidade de licenças BYOL baseadas em núcleos.",
+          "en": "With default tenancy, instances run on hardware shared with other customers and may move between physical servers. You cannot count or pin physical cores, so BYOL compliance for core-based licenses cannot be demonstrated."
         }
       },
       {
@@ -7093,8 +7093,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "Esta alternativa atende diretamente ao requisito descrito no enunciado.",
-          "en": "This option directly addresses the requirement described in the question."
+          "pt-BR": "Um EC2 Dedicated Host é um servidor físico totalmente dedicado a você. Ele expõe sockets e núcleos físicos e permite manter as instâncias no mesmo servidor, requisitos para usar licenças existentes por socket, núcleo ou VM (BYOL), como Windows Server, SQL Server e Oracle, e comprovar conformidade. Integra-se ao AWS License Manager.",
+          "en": "An EC2 Dedicated Host is a physical server fully dedicated to you. It exposes physical sockets and cores and lets you keep instances on the same server, which is required to use existing per-socket, per-core or per-VM licenses (BYOL) such as Windows Server, SQL Server and Oracle, and to prove compliance. It integrates with AWS License Manager."
         }
       },
       {
@@ -7104,14 +7104,14 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Esta alternativa não atende ao requisito principal do cenário: uma empresa possui licenças baseadas em núcleos físicos e pretende fazer BYOL no EC2. Qual opção usar? A opção correta é mais específica para essa finalidade.",
-          "en": "This option does not meet the scenario's main requirement: A company has licenses based on physical cores and plans to use BYOL on EC2. Which option should it use? The correct option is more specific to this purpose."
+          "pt-BR": "Capacity Reservation apenas garante capacidade de computação em uma zona de disponibilidade. Ela não dedica um servidor físico a você nem expõe sockets/núcleos, portanto não atende requisitos de licenciamento BYOL.",
+          "en": "Capacity Reservation only guarantees compute capacity in an Availability Zone. It does not dedicate a physical server to you or expose sockets/cores, so it does not satisfy BYOL licensing requirements."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "Esta alternativa atende diretamente ao requisito descrito no enunciado.",
-      "en": "This option directly addresses the requirement described in the question."
+      "pt-BR": "BYOL (Bring Your Own License) é usar licenças de software que você já possui, como Windows Server, SQL Server ou Oracle, na AWS. Muitas dessas licenças são contadas por socket ou núcleo físico e exigem comprovar em qual servidor rodam. O EC2 Dedicated Host é um servidor físico dedicado a você, que expõe sockets e núcleos e mantém as instâncias no mesmo host, atendendo a esse requisito. Reserved Instances (desconto de cobrança), tenancy default (hardware compartilhado) e Capacity Reservation (apenas reserva de capacidade) não dão controle sobre o servidor físico.",
+      "en": "BYOL (Bring Your Own License) means using software licenses you already own, such as Windows Server, SQL Server or Oracle, on AWS. Many of these are counted per physical socket or core and require showing which server they run on. An EC2 Dedicated Host is a physical server dedicated to you that exposes sockets and cores and keeps instances on the same host, meeting this requirement. Reserved Instances (billing discount), default tenancy (shared hardware) and Capacity Reservation (capacity only) give no control over the physical server."
     }
   },
   {
