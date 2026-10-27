@@ -112,7 +112,7 @@ test('mantém a seleção única e o feedback imediato nas questões comuns', ()
   expect(screen.getAllByRole('radio')[0]).toBeChecked();
 });
 
-test('no simulado completo, confirma todas as opções corretas antes de avançar e calcula a pontuação', async () => {
+test('no simulado completo, confirma as opções corretas e calcula a pontuação ao finalizar', async () => {
   renderFullExam();
   advanceToMultipleQuestion();
 
@@ -120,14 +120,13 @@ test('no simulado completo, confirma todas as opções corretas antes de avança
   expect(checkboxes).toHaveLength(3);
 
   const nextButton = screen.getByRole('button', { name: 'Finalizar' });
-  expect(nextButton).toBeDisabled();
+  expect(nextButton).toBeEnabled();
   fireEvent.click(checkboxes[0]);
   fireEvent.click(checkboxes[2]);
   expect(checkboxes[0]).toBeChecked();
   expect(checkboxes[2]).toBeChecked();
   expect(screen.queryByText('✓ Correto!')).not.toBeInTheDocument();
 
-  expect(nextButton).toBeDisabled();
   fireEvent.click(screen.getByRole('button', { name: 'Confirmar resposta' }));
 
   expect(screen.getByText('✓ Correto!')).toBeInTheDocument();
@@ -282,4 +281,25 @@ test('na sessão por domínio, resposta única errada mostra a explicação da c
   expect(screen.getByText('Explicação: Resposta única correta')).toBeInTheDocument();
   expect(screen.getByText(/Sua resposta:/)).toHaveTextContent('Resposta única incorreta');
   expect(screen.getByText('Explicação: Resposta única incorreta')).toBeInTheDocument();
+});
+
+test('na última questão esconde "Finalizar Agora" e mantém "Finalizar"', () => {
+  renderFullExam();
+  expect(screen.getByRole('button', { name: 'Finalizar Agora' })).toBeInTheDocument();
+
+  advanceToMultipleQuestion();
+  expect(screen.queryByRole('button', { name: 'Finalizar Agora' })).not.toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Finalizar' })).toBeInTheDocument();
+});
+
+test('na última questão, "Finalizar" fica ativo mesmo sem resposta', async () => {
+  renderFullExam();
+  advanceToMultipleQuestion();
+
+  const finish = screen.getByRole('button', { name: 'Finalizar' });
+  expect(finish).toBeEnabled();
+  fireEvent.click(finish);
+
+  expect(screen.getByText('Você acertou 1 de 2 questões')).toBeInTheDocument();
+  await screen.findByText('Resultado salvo no ranking.');
 });

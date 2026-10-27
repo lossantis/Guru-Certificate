@@ -412,6 +412,11 @@ const CloudPractitioner = () => {
   };
 
   const nextQuestion = () => {
+    if (currentQuestion === examQuestions.length - 1) {
+      finishExam();
+      return;
+    }
+
     const selected = getSelectedAnswerIndices(currentQuestion);
     if (selected.length === 0 || !lockedQuestions[currentQuestion]) {
       setModalContent({
@@ -425,11 +430,7 @@ const CloudPractitioner = () => {
       return;
     }
 
-    if (currentQuestion < examQuestions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      finishExam();
-    }
+    setCurrentQuestion(currentQuestion + 1);
   };
 
   // Rola só depois de renderizar a nova questão: com rolagem suave iniciada antes,
@@ -729,19 +730,21 @@ const CloudPractitioner = () => {
           <Button 
             className="primary" 
             onClick={nextQuestion}
-            disabled={!hasSelectedAnswers || !isLocked}
+            disabled={currentQuestion < examQuestions.length - 1 && (!hasSelectedAnswers || !isLocked)}
           >
             {currentQuestion === examQuestions.length - 1 ? 'Finalizar' : 'Próxima →'}
           </Button>
           </NavCenter>
 
           <NavEnd>
-            <Button 
-              className="danger" 
-              onClick={finishExam}
-            >
-              Finalizar Agora
-            </Button>
+            {currentQuestion < examQuestions.length - 1 && (
+              <Button 
+                className="danger" 
+                onClick={finishExam}
+              >
+                Finalizar Agora
+              </Button>
+            )}
           </NavEnd>
         </NavBar>
       </Content>
