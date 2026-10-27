@@ -113,8 +113,9 @@ export default {
           SELECT r.user_id AS userId, u.username, r.exam_type AS examType,
             SUM(r.correct) AS totalCorrect, COUNT(*) AS totalExams, MAX(r.percentage) AS bestPercentage
           FROM results r JOIN users u ON u.id = r.user_id GROUP BY r.user_id, r.exam_type
-        ) SELECT *, ROW_NUMBER() OVER (PARTITION BY examType ORDER BY bestPercentage DESC, totalCorrect DESC, userId) AS position
-          FROM scores WHERE (? IS NULL OR examType = ?) ORDER BY examType, position`).bind(examType, examType).all();
+        ) SELECT *, RANK() OVER (ORDER BY bestPercentage DESC) AS position
+          FROM scores WHERE (? IS NULL OR examType = ?) ORDER BY bestPercentage DESC, username COLLATE NOCASE,
+            CASE examType WHEN 'cloud-practitioner' THEN 1 WHEN 'developer-associate' THEN 2 ELSE 3 END`).bind(examType, examType).all();
         return json(200, ranking.results);
       }
       if (url.pathname === '/api/results') {

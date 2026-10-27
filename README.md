@@ -68,7 +68,12 @@ O cadastro valida duplicidade de nome de usuário ou e-mail e exige senha com pe
 
 O perfil reúne estatísticas gerais e por certificação, assuntos para revisar e a análise de cada simulado, em uma lista expansível (accordion) com um simulado aberto por vez. As estatísticas de erros contam apenas as questões respondidas incorretamente; questões não respondidas reduzem a nota, mas não aparecem como erradas.
 
-O ranking pode ser consultado sem login. A classificação ocorre **dentro de cada certificação**, pelo maior percentual obtido pelo usuário (`bestPercentage`). Em caso de empate, o total acumulado de acertos (`totalCorrect`) é usado como desempate. A visualização geral reúne as trilhas e preserva a posição dentro de cada uma.
+O ranking pode ser consultado sem login e tem os filtros **Todos**, **Cloud Practitioner**, **Developer Associate** e **Solutions Architect**. Cada linha é o melhor percentual (`bestPercentage`) de um usuário em uma certificação.
+
+- **Posição:** definida só pelo percentual; usuários com a mesma nota empatam e dividem a posição (1º, 1º, 1º, 4º...).
+- **Ordem da lista:** maior percentual, depois nome do usuário e, por último, a prova (Cloud Practitioner, Developer Associate e Solutions Architect).
+- **Todos:** mistura todas as provas em uma única classificação por nota. Quem tem resultado em mais de uma prova aparece uma vez por prova, até três vezes; com 100% nas três, empata o primeiro lugar três vezes.
+- **Filtro por prova:** mostra apenas aquela certificação, com as mesmas regras.
 
 ### Persistência compartilhada
 
@@ -188,7 +193,7 @@ O arquivo `vercel.json` configura o build estático, o redirecionamento das rota
 | `/hands-on/tutorial/:id` | Tutorial prático |
 | `/cadastro` | Cadastro e login |
 | `/perfil` | Perfil e histórico |
-| `/ranking` | Ranking por certificação |
+| `/ranking` | Ranking geral e por certificação |
 
 Nos flashcards, `examType` pode ser `cloud-practitioner`, `solutions-architect` ou `developer-associate`. Na prática por domínio, `domainId` pode ser `cloud-concepts`, `security-compliance`, `cloud-technology-services` ou `billing-pricing-support`.
 
