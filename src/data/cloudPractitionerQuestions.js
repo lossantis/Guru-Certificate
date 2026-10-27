@@ -3199,8 +3199,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O cliente herda os controles da infraestrutura física, mas continua responsável por configurar seus serviços, acessos e dados de forma conforme. A conformidade da aplicação não é automática.",
-          "en": "The customer inherits the physical infrastructure controls but remains responsible for configuring its services, access, and data in a compliant way. Application compliance is not automatic."
+          "pt-BR": "O cliente herda os controles da infraestrutura física, mas continua responsável por configurar seus serviços, acessos e dados de forma conforme. Para a HIPAA (Health Insurance Portability and Accountability Act, lei dos EUA que protege informações de saúde), a conformidade da aplicação que processa PHI (Protected Health Information, informações de saúde protegidas) não é automática.",
+          "en": "The customer inherits the physical infrastructure controls but remains responsible for configuring its services, access, and data in a compliant way. For HIPAA (Health Insurance Portability and Accountability Act, the US law that protects health information), compliance of the application that processes PHI (Protected Health Information) is not automatic."
         }
       },
       {
@@ -3210,8 +3210,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "Para HIPAA, o cliente aceita o Business Associate Addendum (BAA), por exemplo pelo AWS Artifact, processa PHI apenas em serviços qualificados e configura criptografia, acessos e logs sob sua responsabilidade.",
-          "en": "For HIPAA, the customer accepts the Business Associate Addendum (BAA), for example through AWS Artifact, processes PHI only in eligible services, and configures encryption, access, and logging under its responsibility."
+          "pt-BR": "Para a HIPAA (Health Insurance Portability and Accountability Act, lei dos EUA que protege informações de saúde), o cliente aceita o Business Associate Addendum (BAA, adendo de associado de negócios), por exemplo pelo AWS Artifact, processa PHI (Protected Health Information, informações de saúde protegidas) apenas em serviços qualificados e configura criptografia, acessos e logs sob sua responsabilidade.",
+          "en": "For HIPAA (Health Insurance Portability and Accountability Act, the US law that protects health information), the customer accepts the Business Associate Addendum (BAA), for example through AWS Artifact, processes PHI (Protected Health Information) only in eligible services, and configures encryption, access, and logging under its responsibility."
         }
       },
       {
@@ -3221,8 +3221,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "A AWS não audita nem certifica as aplicações dos clientes. Garantir e demonstrar a conformidade das próprias aplicações é responsabilidade do cliente, que pode contratar seus auditores.",
-          "en": "AWS does not audit or certify customers' applications. Ensuring and demonstrating the compliance of its own applications is the customer's responsibility, which may hire its own auditors."
+          "pt-BR": "A AWS não audita nem certifica as aplicações dos clientes para a HIPAA (Health Insurance Portability and Accountability Act). Garantir e demonstrar a conformidade das próprias aplicações que tratam PHI (Protected Health Information, informações de saúde protegidas) é responsabilidade do cliente, que pode contratar seus auditores.",
+          "en": "AWS does not audit or certify customers' applications for HIPAA (Health Insurance Portability and Accountability Act). Ensuring and demonstrating the compliance of its own applications that handle PHI (Protected Health Information) is the customer's responsibility, which may hire its own auditors."
         }
       },
       {
@@ -3232,14 +3232,14 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "A localização dos dados não torna um serviço adequado à HIPAA. Apenas os serviços qualificados pela HIPAA, cobertos pelo BAA, podem ser usados para processar PHI.",
-          "en": "Data location does not make a service suitable for HIPAA. Only HIPAA-eligible services, covered by the BAA, may be used to process PHI."
+          "pt-BR": "A localização dos dados não torna um serviço adequado à HIPAA (Health Insurance Portability and Accountability Act). Apenas os serviços qualificados pela HIPAA, cobertos pelo BAA (Business Associate Addendum), podem ser usados para processar PHI (Protected Health Information, informações de saúde protegidas).",
+          "en": "Data location does not make a service suitable for HIPAA (Health Insurance Portability and Accountability Act). Only HIPAA-eligible services, covered by the BAA (Business Associate Addendum), may be used to process PHI (Protected Health Information)."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "Na conformidade, a AWS cuida dos controles da infraestrutura, e o cliente precisa usar serviços elegíveis e configurar os controles de sua responsabilidade para cada programa.",
-      "en": "In compliance, AWS handles the infrastructure controls, and the customer must use eligible services and configure the controls under its responsibility for each program."
+      "pt-BR": "Na conformidade, a AWS cuida dos controles da infraestrutura, e o cliente precisa usar serviços elegíveis e configurar os controles de sua responsabilidade para cada programa. No caso da HIPAA (Health Insurance Portability and Accountability Act), isso inclui aceitar o BAA (Business Associate Addendum) e proteger as PHI (Protected Health Information, informações de saúde protegidas).",
+      "en": "In compliance, AWS handles the infrastructure controls, and the customer must use eligible services and configure the controls under its responsibility for each program. In the case of HIPAA (Health Insurance Portability and Accountability Act), this includes accepting the BAA (Business Associate Addendum) and protecting the PHI (Protected Health Information)."
     }
   },
   {
