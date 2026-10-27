@@ -649,8 +649,10 @@ const CloudPractitioner = () => {
                   ? Array.from(new Set([...selectedAnswerIndices, ...correctAnswerIndices])).sort((a, b) => a - b)
                   : selectedAnswerIndices;
                 const relevantAlternatives = relevantIndices.map(index => currentQ.alternatives[index]);
+                const correctAlternative = currentQ.alternatives[correctAnswerIndices[0]];
+                const getText = text => text?.[language] || text?.['pt-BR'] || '';
                 const explanation = selectedAlternative?.explanation || generalExplanation;
-                if (!currentQ.multiple && !explanation) return null;
+                if (!currentQ.multiple && !explanation && !correctAlternative?.explanation) return null;
 
                 return (
                   <ExplanationBox>
@@ -663,14 +665,7 @@ const CloudPractitioner = () => {
                             || currentQ.alternatives[index].title['pt-BR']
                         )).join('; ')}
                       </p>
-                    ) : !isCorrect && (
-                      <p style={{ marginBottom: 'var(--spacing-3)', fontWeight: '600', color: 'var(--aws-red)' }}>
-                        {language === 'pt-BR'
-                          ? `A resposta correta é: "${currentQ.alternatives[correctAnswerIndices[0]].title[language] || currentQ.alternatives[correctAnswerIndices[0]].title['pt-BR']}"`
-                          : `The correct answer is: "${currentQ.alternatives[correctAnswerIndices[0]].title[language] || currentQ.alternatives[correctAnswerIndices[0]].title['pt-BR']}"`
-                        }
-                      </p>
-                    )}
+                    ) : null}
                     {currentQ.multiple
                       ? relevantAlternatives.map(alternative => (
                         <p key={alternative.title['pt-BR']} style={{ marginBottom: 'var(--spacing-2)' }}>
@@ -678,7 +673,26 @@ const CloudPractitioner = () => {
                           {alternative.explanation[language] || alternative.explanation['pt-BR']}
                         </p>
                       ))
-                      : <p>{explanation[language] || explanation['pt-BR'] || explanation}</p>}
+                      : (
+                        <>
+                          {!isCorrect && (
+                            <p style={{ marginBottom: 'var(--spacing-2)', fontWeight: '600', color: 'var(--aws-red)' }}>
+                              {language === 'pt-BR' ? 'A resposta correta é: ' : 'The correct answer is: '}
+                              {getText(correctAlternative.title)}
+                            </p>
+                          )}
+                          {correctAlternative && <p style={{ marginBottom: 'var(--spacing-3)' }}>{getText(correctAlternative.explanation)}</p>}
+                          {!isCorrect && selectedAlternative && (
+                            <>
+                              <p style={{ marginBottom: 'var(--spacing-2)', fontWeight: '600' }}>
+                                {language === 'pt-BR' ? 'Sua resposta: ' : 'Your answer: '}
+                                {getText(selectedAlternative.title)}
+                              </p>
+                              <p>{getText(selectedAlternative.explanation)}</p>
+                            </>
+                          )}
+                        </>
+                      )}
                   </ExplanationBox>
                 );
               })()}
