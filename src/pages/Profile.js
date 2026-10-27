@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Accordion from '../components/Accordion';
 import NavigationButtons from '../components/NavigationButtons';
 import { getCurrentUser, getUserStatistics, getWrongCount, logoutUser } from '../services/userService';
 import { cloudPractitionerQuestions } from '../data/cloudPractitionerQuestions';
@@ -139,6 +140,7 @@ const TopicsSection = styled.div`
   border-radius: var(--radius-xl);
   padding: var(--spacing-6);
   box-shadow: var(--shadow-md);
+  margin-bottom: var(--spacing-6);
 `;
 
 const TopicsList = styled.div`
@@ -182,9 +184,6 @@ const ExamHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-4);
-  padding-bottom: var(--spacing-4);
-  border-bottom: 2px solid var(--aws-gray-200);
   flex-wrap: wrap;
   gap: var(--spacing-4);
 `;
@@ -359,10 +358,13 @@ const getPersonalizedAnalysis = (result) => {
 const Profile = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
+  // Só um simulado aberto por vez; null = todos fechados.
+  const [openExamId, setOpenExamId] = useState(null);
   const [statistics, setStatistics] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
+  const toggleExam = (id) => setOpenExamId(prev => (prev === id ? null : id));
 
   useEffect(() => {
     const currentUser = getCurrentUser();
@@ -515,9 +517,15 @@ const Profile = () => {
                 {statistics.detailedResults.map((result, index) => {
                   const questions = getQuestionsByType(result.examType);
                   const analysis = getPersonalizedAnalysis(result);
+                  const isOpen = openExamId === result.id;
                   
                   return (
-                    <ExamDetailsSection key={result.id} style={{ marginBottom: 'var(--spacing-6)' }}>
+                    <Accordion
+                      key={result.id}
+                      id={`exam-${result.id}`}
+                      isOpen={isOpen}
+                      onToggle={() => toggleExam(result.id)}
+                      header={(
                       <ExamHeader>
                         <div>
                           <ExamTitle>
@@ -536,7 +544,8 @@ const Profile = () => {
                           {result.passed ? '✓ Aprovado' : '✗ Não Aprovado'}
                         </div>
                       </ExamHeader>
-                      
+                      )}
+                    >
                       <ExamSummary>
                         <SummaryItem>
                           <SummaryLabel>Acertos</SummaryLabel>
@@ -646,7 +655,7 @@ const Profile = () => {
                           </div>
                         </div>
                       )}
-                    </ExamDetailsSection>
+                    </Accordion>
                   );
                 })}
               </ExamDetailsSection>
