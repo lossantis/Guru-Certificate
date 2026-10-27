@@ -7260,8 +7260,8 @@ export const cloudPractitionerQuestions = [
       "en": "Databases and analytics"
     },
     "description": {
-      "pt-BR": "Qual serviço pode migrar dados de banco de dados para Amazon RDS com CDC?",
-      "en": "Which service can migrate database data to Amazon RDS using CDC?"
+      "pt-BR": "Uma empresa precisa migrar um banco de dados local para o Amazon RDS mantendo o banco de origem em uso durante a migração, replicando continuamente as alterações por meio de CDC. Qual serviço atende a esse requisito?",
+      "en": "A company needs to migrate an on-premises database to Amazon RDS while keeping the source database in use during the migration, continuously replicating changes using CDC. Which service meets this requirement?"
     },
     "question": {
       "pt-BR": "",
@@ -7289,8 +7289,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O Migration Evaluator analisa ambientes locais para apoiar decisões e estimativas de migração. Ele não executa a migração nem mantém dados de bancos sincronizados com CDC.",
-          "en": "Migration Evaluator analyzes on-premises environments to support migration decisions and estimates. It does not perform the migration or keep database data synchronized with CDC."
+          "pt-BR": "O Migration Evaluator analisa ambientes locais para apoiar decisões e estimativas de migração. Ele não executa a migração nem mantém dados de bancos sincronizados com CDC. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
+          "en": "Migration Evaluator analyzes on-premises environments to support migration decisions and estimates. It does not perform the migration or keep database data synchronized with CDC. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
         }
       },
       {
@@ -7311,8 +7311,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "O AWS DMS migra dados entre bancos de dados e usa CDC para capturar alterações feitas na origem enquanto a carga inicial ocorre ou após ela. Isso permite manter um banco RDS de destino atualizado até a transição.",
-          "en": "AWS DMS migrates data between databases and uses CDC to capture changes made at the source during or after the initial load. This can keep an RDS target up to date until cutover."
+          "pt-BR": "O AWS DMS migra dados entre bancos de dados e usa CDC para capturar alterações feitas na origem enquanto a carga inicial ocorre ou após ela. Isso permite manter um banco RDS de destino atualizado até a transição. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
+          "en": "AWS DMS migrates data between databases and uses CDC to capture changes made at the source during or after the initial load. This can keep an RDS target up to date until cutover. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
         }
       }
     ],
