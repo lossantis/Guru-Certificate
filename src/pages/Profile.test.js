@@ -25,7 +25,7 @@ test('lista de simulados começa fechada e mantém no máximo um aberto', async 
     detailedResults: [makeResult('new', '2026-10-27T12:00:00Z'), makeResult('old', '2026-10-27T10:00:00Z')]
   });
 
-  render(<MemoryRouter><Profile /></MemoryRouter>);
+  render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Profile /></MemoryRouter>);
 
   const toggles = await screen.findAllByRole('button', { name: /Simulado \d/ });
   expect(toggles[0]).toHaveAttribute('aria-expanded', 'false');

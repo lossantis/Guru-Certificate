@@ -9,7 +9,7 @@ jest.mock('../services/userService', () => ({ getCurrentUser: jest.fn(), getRank
 jest.mock('../components/Reveal', () => ({ children }) => <div>{children}</div>);
 
 const entry = { userId: 'student', username: 'Estudante', examType: 'developer-associate', bestPercentage: 90, position: 1 };
-const openRanking = () => render(<MemoryRouter><Ranking /></MemoryRouter>);
+const openRanking = () => render(<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}><Ranking /></MemoryRouter>);
 beforeEach(() => { jest.clearAllMocks(); getRanking.mockResolvedValue([entry]); });
 
 test('exibe posição após o simulado sem falhar ao renderizar a animação', async () => {

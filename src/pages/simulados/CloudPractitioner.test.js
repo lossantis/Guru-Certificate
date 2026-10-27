@@ -59,13 +59,13 @@ const multipleQuestion = makeQuestion({
 });
 
 const renderFullExam = () => render(
-  <MemoryRouter>
+  <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
     <CloudPractitioner />
   </MemoryRouter>
 );
 
 const renderDomainSession = () => render(
-  <MemoryRouter initialEntries={['/simulado/cloud-practitioner/dominio/cloud-concepts']}>
+  <MemoryRouter initialEntries={['/simulado/cloud-practitioner/dominio/cloud-concepts']} future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
     <Routes>
       <Route
         path="/simulado/cloud-practitioner/dominio/:domainId"
@@ -112,7 +112,7 @@ test('mantém a seleção única e o feedback imediato nas questões comuns', ()
   expect(screen.getAllByRole('radio')[0]).toBeChecked();
 });
 
-test('no simulado completo, confirma todas as opções corretas antes de avançar e calcula a pontuação', () => {
+test('no simulado completo, confirma todas as opções corretas antes de avançar e calcula a pontuação', async () => {
   renderFullExam();
   advanceToMultipleQuestion();
 
@@ -137,12 +137,13 @@ test('no simulado completo, confirma todas as opções corretas antes de avança
   expect(nextButton).toBeEnabled();
   fireEvent.click(nextButton);
   expect(screen.getByText('Você acertou 2 de 2 questões')).toBeInTheDocument();
+  await screen.findByText('Resultado salvo no ranking.');
 });
 
 test.each([
   ['omitir uma opção correta', [0]],
   ['selecionar uma opção incorreta extra', [0, 1, 2]]
-])('no simulado completo, marca como incorreta a resposta que %s', (_description, selections) => {
+])('no simulado completo, marca como incorreta a resposta que %s', async (_description, selections) => {
   renderFullExam();
   advanceToMultipleQuestion();
 
@@ -153,6 +154,7 @@ test.each([
   expect(screen.getByText('✗ Incorreto')).toBeInTheDocument();
   fireEvent.click(screen.getByRole('button', { name: 'Finalizar' }));
   expect(screen.getByText('Você acertou 1 de 2 questões')).toBeInTheDocument();
+  await screen.findByText('Resultado salvo no ranking.');
 });
 
 test('na sessão por domínio, permite múltiplas seleções e confirma a resposta antes de pontuar', () => {
@@ -192,7 +194,7 @@ test.each([
   expect(screen.getByText('Você acertou 1 de 2 questões (50.0%)')).toBeInTheDocument();
 });
 
-test('questões não respondidas reduzem a nota mas não entram na lista de erradas', () => {
+test('questões não respondidas reduzem a nota mas não entram na lista de erradas', async () => {
   renderFullExam();
 
   fireEvent.click(screen.getByText('Resposta única incorreta'));
@@ -204,6 +206,7 @@ test('questões não respondidas reduzem a nota mas não entram na lista de erra
     'cloud-practitioner',
     expect.objectContaining({ correct: 0, total: 2, wrongQuestions: [1] })
   );
+  await screen.findByText('Resultado salvo no ranking.');
 });
 
 test('ao recarregar, mantém as mesmas questões e as respostas já dadas', () => {
@@ -232,12 +235,13 @@ test('ao recarregar, continua na questão em que estava', () => {
   expect(screen.getByText('Enunciado da questão 2')).toBeInTheDocument();
 });
 
-test('finalizar limpa o simulado em andamento', () => {
+test('finalizar limpa o simulado em andamento', async () => {
   renderFullExam();
   fireEvent.click(screen.getByText('Resposta única correta'));
   expect(localStorage.getItem('guru_certificate_cloud_exam_in_progress')).not.toBeNull();
   fireEvent.click(screen.getByRole('button', { name: 'Finalizar Agora' }));
   expect(localStorage.getItem('guru_certificate_cloud_exam_in_progress')).toBeNull();
+  await screen.findByText('Resultado salvo no ranking.');
 });
 
 test('Próxima e Anterior rolam a página para o topo', () => {
@@ -249,4 +253,23 @@ test('Próxima e Anterior rolam a página para o topo', () => {
   fireEvent.click(screen.getByRole('button', { name: '← Anterior' }));
   expect(window.scrollTo).toHaveBeenCalledTimes(2);
   expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'smooth' });
+});
+
+test('resposta única errada mostra a explicação da correta e a da resposta escolhida', () => {
+  renderFullExam();
+  fireEvent.click(screen.getByText('Resposta única incorreta'));
+
+  expect(screen.getByText(/A resposta correta é:/)).toHaveTextContent('Resposta única correta');
+  expect(screen.getByText('Explicação: Resposta única correta')).toBeInTheDocument();
+  expect(screen.getByText(/Sua resposta:/)).toHaveTextContent('Resposta única incorreta');
+  expect(screen.getByText('Explicação: Resposta única incorreta')).toBeInTheDocument();
+});
+
+test('resposta única certa mostra só a explicação da correta', () => {
+  renderFullExam();
+  fireEvent.click(screen.getByText('Resposta única correta'));
+
+  expect(screen.getByText('Explicação: Resposta única correta')).toBeInTheDocument();
+  expect(screen.queryByText(/A resposta correta é:/)).not.toBeInTheDocument();
+  expect(screen.queryByText(/Sua resposta:/)).not.toBeInTheDocument();
 });
