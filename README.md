@@ -135,6 +135,12 @@ npm run build
 
 # Executar o runner de testes
 npm test
+
+# Executar todos os testes uma vez, sem modo watch
+npm test -- --watchAll=false
+
+# Executar apenas os testes do simulado Cloud Practitioner
+npm test -- --watchAll=false --runTestsByPath src/pages/simulados/CloudPractitioner.test.js
 ```
 
 Se `react-scripts` não for encontrado, instale as dependências com `npm ci` antes de executar os comandos.
