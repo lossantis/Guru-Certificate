@@ -28,6 +28,7 @@ Os bancos de questões abordam cenários de uso de serviços AWS. Os simulados o
 - Navegação entre questões, exigindo selecionar e confirmar respostas múltiplas antes de avançar.
 - Questões de resposta única usam seleção simples e feedback imediato; questões múltiplas permitem marcar várias alternativas e exigem confirmação.
 - Cada tentativa de Cloud Practitioner sorteia 65 questões entre os domínios de acordo com a quantidade configurada para cada um; a ordem das questões também é aleatória.
+- Ao recarregar a página no meio do simulado completo de Cloud Practitioner, a tentativa é retomada com as mesmas questões, as respostas já dadas, a questão atual e o tempo restante. Nada é salvo no perfil ou no ranking até finalizar; se o prazo de 90 minutos esgotar com a página fechada, a tentativa é descartada.
 - Validação de questões múltiplas exige selecionar exatamente o conjunto de alternativas corretas.
 - Feedback com indicação de todas as respostas corretas e explicações relevantes.
 - Bloqueio da resposta após seleção única ou confirmação da resposta múltipla.

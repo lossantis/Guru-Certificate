@@ -82,6 +82,7 @@ const advanceToMultipleQuestion = () => {
 };
 
 beforeEach(() => {
+  localStorage.clear();
   cloudPractitionerQuestions.splice(
     0,
     cloudPractitionerQuestions.length,
@@ -203,4 +204,38 @@ test('questões não respondidas reduzem a nota mas não entram na lista de erra
     'cloud-practitioner',
     expect.objectContaining({ correct: 0, total: 2, wrongQuestions: [1] })
   );
+});
+
+test('ao recarregar, mantém as mesmas questões e as respostas já dadas', () => {
+  const { unmount } = renderFullExam();
+  fireEvent.click(screen.getByText('Resposta única correta'));
+  unmount();
+
+  createCloudPractitionerExam.mockReturnValue([multipleQuestion, singleQuestion]);
+  renderFullExam();
+
+  expect(createCloudPractitionerExam).toHaveBeenCalledTimes(1);
+  expect(screen.getByText('Enunciado da questão 1')).toBeInTheDocument();
+  expect(screen.getByText('✓ Correto!')).toBeInTheDocument();
+  expect(screen.getAllByRole('radio')[0]).toBeChecked();
+});
+
+test('ao recarregar, continua na questão em que estava', () => {
+  const { unmount } = renderFullExam();
+  fireEvent.click(screen.getByText('Resposta única correta'));
+  fireEvent.click(screen.getByRole('button', { name: 'Próxima →' }));
+  expect(screen.getByText('Enunciado da questão 2')).toBeInTheDocument();
+  unmount();
+
+  renderFullExam();
+
+  expect(screen.getByText('Enunciado da questão 2')).toBeInTheDocument();
+});
+
+test('finalizar limpa o simulado em andamento', () => {
+  renderFullExam();
+  fireEvent.click(screen.getByText('Resposta única correta'));
+  expect(localStorage.getItem('guru_certificate_cloud_exam_in_progress')).not.toBeNull();
+  fireEvent.click(screen.getByRole('button', { name: 'Finalizar Agora' }));
+  expect(localStorage.getItem('guru_certificate_cloud_exam_in_progress')).toBeNull();
 });

@@ -2,8 +2,24 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { createCloudPractitionerExam } from '../../data/cloudPractitionerExam';
+import { cloudPractitionerQuestions } from '../../data/cloudPractitionerQuestions';
 import ExamProtection from '../../components/ExamProtection';
 import { getCurrentUser, saveExamResult } from '../../services/userService';
+
+const EXAM_DURATION_SECONDS = 5400; // 90 minutos, mesma duração do exame real CLF-C02 (65 questões)
+const IN_PROGRESS_KEY = 'guru_certificate_cloud_exam_in_progress';
+
+// Recupera o simulado em andamento (mesmas questões, respostas e prazo) após recarregar a página.
+const loadSavedExam = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(IN_PROGRESS_KEY));
+    if (!saved || saved.userId !== (getCurrentUser()?.id ?? null) || saved.deadline <= Date.now()) return null;
+    const questions = saved.questionIds.map(id => cloudPractitionerQuestions.find(question => question.id === id));
+    return questions.every(Boolean) ? { ...saved, questions } : null;
+  } catch {
+    return null;
+  }
+};
 
 const SimuladoContainer = styled.div`
   min-height: calc(100vh - 160px);
@@ -317,12 +333,14 @@ const ModalContent = styled.div`
 
 const CloudPractitioner = () => {
   const navigate = useNavigate();
-  const [examQuestions] = useState(() => createCloudPractitionerExam());
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [answeredQuestions, setAnsweredQuestions] = useState({});
-  const [lockedQuestions, setLockedQuestions] = useState({}); // Questões bloqueadas após seleção
-  const [timeLeft, setTimeLeft] = useState(5400); // 90 minutes in seconds, same duration as the real CLF-C02 exam (65 questions)
+  const [saved] = useState(loadSavedExam);
+  const [examQuestions] = useState(() => saved?.questions ?? createCloudPractitionerExam());
+  const [deadline] = useState(() => saved?.deadline ?? Date.now() + EXAM_DURATION_SECONDS * 1000);
+  const [currentQuestion, setCurrentQuestion] = useState(() => Math.min(saved?.currentQuestion ?? 0, examQuestions.length - 1));
+  const [selectedAnswers, setSelectedAnswers] = useState(saved?.selectedAnswers ?? {});
+  const [answeredQuestions, setAnsweredQuestions] = useState(saved?.answeredQuestions ?? {});
+  const [lockedQuestions, setLockedQuestions] = useState(saved?.lockedQuestions ?? {}); // Questões bloqueadas após seleção
+  const [timeLeft, setTimeLeft] = useState(() => Math.max(0, Math.ceil((deadline - Date.now()) / 1000)));
   const [language, setLanguage] = useState('pt-BR');
   const [showModal, setShowModal] = useState(false);
   const [modalContent, setModalContent] = useState({});
@@ -463,18 +481,32 @@ const CloudPractitioner = () => {
         .catch(error => setSaveStatus(`${error.message} O resultado ficou pendente neste navegador; abra o ranking ou perfil para tentar sincronizar novamente.`));
     }
     
+    localStorage.removeItem(IN_PROGRESS_KEY);
     setIsFinished(true);
   }, [answeredQuestions, lockedQuestions, examQuestions]);
+
+  useEffect(() => {
+    if (isFinished) return;
+    localStorage.setItem(IN_PROGRESS_KEY, JSON.stringify({
+      userId: getCurrentUser()?.id ?? null,
+      deadline,
+      questionIds: examQuestions.map(question => question.id),
+      selectedAnswers,
+      answeredQuestions,
+      lockedQuestions,
+      currentQuestion
+    }));
+  }, [isFinished, deadline, examQuestions, selectedAnswers, answeredQuestions, lockedQuestions, currentQuestion]);
 
   // Timer effect
   useEffect(() => {
     if (timeLeft > 0 && !isFinished) {
-      const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
+      const timer = setTimeout(() => setTimeLeft(Math.max(0, Math.ceil((deadline - Date.now()) / 1000))), 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0 && !isFinished) {
       finishExam();
     }
-  }, [timeLeft, isFinished, finishExam]);
+  }, [timeLeft, isFinished, finishExam, deadline]);
 
   const closeModal = () => {
     setShowModal(false);
