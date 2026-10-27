@@ -5201,11 +5201,11 @@ export const cloudPractitionerQuestions = [
     "domain": "cloud-concepts",
     "title": {
       "pt-BR": "AWS Well-Architected e resiliência",
-      "en": "Well-Architected and resilience"
+      "en": "AWS Well-Architected and resilience"
     },
     "description": {
-      "pt-BR": "Um sistema recupera-se automaticamente de falhas. Qual pilar Well-Architected representa isso?",
-      "en": "A system automatically recovers from failures. Which Well-Architected pillar does this represent?"
+      "pt-BR": "Uma equipe quer revisar a arquitetura de suas cargas de trabalho com base nas melhores práticas do AWS Well-Architected Framework, identificar riscos altos e médios e acompanhar o plano de melhoria. Qual serviço deve usar?",
+      "en": "A team wants to review the architecture of its workloads against the best practices of the AWS Well-Architected Framework, identify high and medium risks, and track the improvement plan. Which service should it use?"
     },
     "question": {
       "pt-BR": "",
@@ -5217,52 +5217,52 @@ export const cloudPractitionerQuestions = [
     "alternatives": [
       {
         "title": {
-          "pt-BR": "Otimização de custos",
-          "en": "Cost optimization"
+          "pt-BR": "AWS Trusted Advisor",
+          "en": "AWS Trusted Advisor"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O pilar de otimização de custos busca entregar valor de negócio ao menor custo adequado. Ele não se concentra principalmente na recuperação de falhas.",
-          "en": "The Cost Optimization pillar seeks to deliver business value at an appropriate lower cost. It is not primarily focused on recovering from failures."
+          "pt-BR": "O AWS Trusted Advisor executa verificações automáticas nos recursos da conta e recomenda melhorias em custo, desempenho, segurança, tolerância a falhas e limites de serviço. Ele não conduz uma revisão guiada por perguntas do Framework nem registra o plano de melhoria de uma carga de trabalho.",
+          "en": "AWS Trusted Advisor runs automated checks on the account's resources and recommends improvements in cost, performance, security, fault tolerance and service limits. It does not run a review guided by the Framework's questions or record an improvement plan for a workload."
         }
       },
       {
         "title": {
-          "pt-BR": "Eficiência de desempenho",
-          "en": "Performance efficiency"
+          "pt-BR": "AWS Cost Explorer",
+          "en": "AWS Cost Explorer"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O pilar de eficiência de desempenho trata do uso eficiente de recursos computacionais e da manutenção do desempenho conforme a demanda muda. Recuperar-se de falhas é responsabilidade do pilar de confiabilidade.",
-          "en": "The Performance Efficiency pillar concerns efficient use of computing resources and maintaining performance as demand changes. Recovering from failures belongs to the Reliability pillar."
+          "pt-BR": "O AWS Cost Explorer permite visualizar e analisar custos e uso ao longo do tempo. Ele cobre apenas a dimensão de custos e não avalia a arquitetura segundo os pilares do Well-Architected Framework.",
+          "en": "AWS Cost Explorer lets you visualize and analyze costs and usage over time. It covers only the cost dimension and does not evaluate the architecture against the pillars of the Well-Architected Framework."
         }
       },
       {
         "title": {
-          "pt-BR": "Excelência operacional",
-          "en": "Operational excellence"
-        },
-        "correct": false,
-        "explanation": {
-          "pt-BR": "O pilar de excelência operacional concentra-se em executar e monitorar sistemas e em melhorar processos e procedimentos. Embora operações eficazes apoiem a confiabilidade, recuperação automática de falhas é característica do pilar de confiabilidade.",
-          "en": "The Operational Excellence pillar focuses on running and monitoring systems and improving processes and procedures. Although effective operations support reliability, automatic recovery from failures is a Reliability pillar characteristic."
-        }
-      },
-      {
-        "title": {
-          "pt-BR": "Confiabilidade",
-          "en": "Reliability"
+          "pt-BR": "AWS Well-Architected Tool",
+          "en": "AWS Well-Architected Tool"
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "O pilar de confiabilidade inclui projetar workloads distribuídos e resilientes, monitorar falhas e recuperar-se delas. Recuperação automática é um exemplo direto desse princípio.",
-          "en": "The Reliability pillar includes designing distributed, resilient workloads, monitoring for failures, and recovering from them. Automatic recovery is a direct example of this principle."
+          "pt-BR": "O AWS Well-Architected Tool, disponível no console, permite registrar uma carga de trabalho, responder às perguntas baseadas nas melhores práticas do Well-Architected Framework e receber a identificação de riscos altos (HRI, High Risk Issues) e médios (MRI, Medium Risk Issues). Também permite definir o status de melhoria e compartilhar a carga de trabalho com outras contas, atendendo exatamente ao que a equipe pede.",
+          "en": "The AWS Well-Architected Tool, available in the console, lets you register a workload, answer questions based on the Well-Architected Framework best practices and get high risk issues (HRIs) and medium risk issues (MRIs) identified. It also lets you set the improvement status and share the workload with other accounts, which is exactly what the team asks for."
+        }
+      },
+      {
+        "title": {
+          "pt-BR": "AWS Config",
+          "en": "AWS Config"
+        },
+        "correct": false,
+        "explanation": {
+          "pt-BR": "O AWS Config registra o histórico de configuração dos recursos e avalia a conformidade com regras. Ele monitora configurações, mas não faz uma revisão de arquitetura segundo as melhores práticas do Framework.",
+          "en": "AWS Config records the configuration history of resources and evaluates compliance with rules. It tracks configurations, but does not perform an architecture review against the Framework best practices."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "A confiabilidade, um pilar do AWS Well-Architected Framework, trata da capacidade de um workload executar corretamente e recuperar-se de falhas. Recuperação automática é uma prática diretamente associada a esse pilar, não a custo, desempenho ou excelência operacional.",
-      "en": "Reliability, a pillar of the AWS Well-Architected Framework, concerns a workload's ability to perform correctly and recover from failures. Automatic recovery is directly associated with this pillar, not cost, performance, or operational excellence."
+      "pt-BR": "O AWS Well-Architected Tool é o serviço do console que guia a revisão de uma carga de trabalho com perguntas baseadas nas melhores práticas do Well-Architected Framework, aponta riscos altos e médios e acompanha o plano de melhoria. O Trusted Advisor verifica recursos da conta, o Cost Explorer analisa apenas custos e o AWS Config avalia conformidade de configurações; nenhum deles conduz essa revisão de arquitetura.",
+      "en": "The AWS Well-Architected Tool is the console service that guides a workload review with questions based on the Well-Architected Framework best practices, points out high and medium risks and tracks the improvement plan. Trusted Advisor checks account resources, Cost Explorer analyzes only costs and AWS Config evaluates configuration compliance; none of them runs this architecture review."
     }
   },
   {
@@ -6050,12 +6050,12 @@ export const cloudPractitionerQuestions = [
     "id": 88,
     "domain": "cloud-technology-services",
     "title": {
-      "pt-BR": "Serviços e arquitetura AWS",
-      "en": "AWS services and architecture"
+      "pt-BR": "Armazenamento AWS",
+      "en": "AWS storage"
     },
     "description": {
-      "pt-BR": "Uma empresa quer automatizar a criação do ambiente e a implantação de versões de aplicativo web Java. Qual serviço?",
-      "en": "A company wants to automate environment creation and deployment of Java web application versions. Which service should it use?"
+      "pt-BR": "Uma empresa quer que suas aplicações locais passem a usar armazenamento praticamente ilimitado na nuvem AWS por meio de um appliance instalado no próprio data center, sem reescrever as aplicações. Qual serviço atende a esse requisito?",
+      "en": "A company wants its on-premises applications to use virtually unlimited AWS cloud storage through an appliance installed in its own data center, without rewriting the applications. Which service meets this requirement?"
     },
     "question": {
       "pt-BR": "",
@@ -6067,52 +6067,52 @@ export const cloudPractitionerQuestions = [
     "alternatives": [
       {
         "title": {
-          "pt-BR": "AWS Control Tower",
-          "en": "AWS Control Tower"
+          "pt-BR": "AWS Snowball Edge",
+          "en": "AWS Snowball Edge"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O AWS Control Tower configura e governa um ambiente AWS multi-conta seguindo práticas recomendadas; não é a plataforma de implantação de versões da aplicação Java.",
-          "en": "AWS Control Tower sets up and governs a multi-account AWS environment using best practices; it is not the platform for deploying Java application versions."
+          "pt-BR": "O AWS Snowball Edge é um dispositivo físico enviado pela AWS, usado principalmente para transferir grandes volumes de dados offline e executar computação na borda. Ele não é um appliance que mantém as aplicações locais acessando continuamente o armazenamento na nuvem.",
+          "en": "AWS Snowball Edge is a physical device shipped by AWS, used mainly to move large volumes of data offline and run edge computing. It is not an appliance that keeps on-premises applications continuously accessing cloud storage."
         }
       },
       {
         "title": {
-          "pt-BR": "Amazon EC2",
-          "en": "Amazon EC2"
+          "pt-BR": "AWS DataSync",
+          "en": "AWS DataSync"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O Amazon EC2 fornece servidores virtuais para executar aplicações, mas exige que a empresa gerencie a configuração do ambiente e o processo de implantação.",
-          "en": "Amazon EC2 provides virtual servers for running applications, but the company must manage environment configuration and the deployment process."
+          "pt-BR": "O AWS DataSync automatiza e acelera a transferência de dados entre o ambiente local e serviços de armazenamento da AWS. É uma ferramenta de transferência e sincronização, não um appliance que faz as aplicações locais usarem o armazenamento na nuvem como se fosse local.",
+          "en": "AWS DataSync automates and speeds up data transfer between on premises and AWS storage services. It is a transfer and synchronization tool, not an appliance that makes on-premises applications use cloud storage as if it were local."
         }
       },
       {
         "title": {
-          "pt-BR": "AWS Elastic Beanstalk",
-          "en": "AWS Elastic Beanstalk"
+          "pt-BR": "Amazon EBS",
+          "en": "Amazon EBS"
+        },
+        "correct": false,
+        "explanation": {
+          "pt-BR": "O Amazon Elastic Block Store (Amazon EBS) fornece volumes de armazenamento em bloco para instâncias do Amazon EC2. Ele atende cargas de trabalho na AWS e não é acessado por aplicações locais por meio de um appliance no data center.",
+          "en": "Amazon Elastic Block Store (Amazon EBS) provides block storage volumes for Amazon EC2 instances. It serves workloads running in AWS and is not accessed by on-premises applications through an appliance in the data center."
+        }
+      },
+      {
+        "title": {
+          "pt-BR": "AWS Storage Gateway",
+          "en": "AWS Storage Gateway"
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "O AWS Elastic Beanstalk recebe o código da aplicação e automatiza o provisionamento do ambiente, a implantação e aspectos operacionais para plataformas como Java.",
-          "en": "AWS Elastic Beanstalk takes application code and automates environment provisioning, deployment, and operational tasks for platforms such as Java."
-        }
-      },
-      {
-        "title": {
-          "pt-BR": "AWS Auto Scaling",
-          "en": "AWS Auto Scaling"
-        },
-        "correct": false,
-        "explanation": {
-          "pt-BR": "O AWS Auto Scaling adiciona ou remove capacidade conforme políticas e métricas, mas não é um serviço de implantação e gerenciamento de versões de aplicações web.",
-          "en": "AWS Auto Scaling adds or removes capacity according to policies and metrics, but it is not a service for deploying and managing web application versions."
+          "pt-BR": "O AWS Storage Gateway conecta um appliance de software local ao armazenamento baseado em nuvem, integrando de forma segura o ambiente local ao armazenamento da AWS. O appliance pode ser implantado como máquina virtual (VM) em VMware, Hyper-V ou Linux KVM, ou como instância do Amazon EC2, e há tipos como File Gateway, Volume Gateway e Tape Gateway. Assim, as aplicações locais continuam funcionando sem reescrita enquanto os dados ficam na nuvem.",
+          "en": "AWS Storage Gateway connects an on-premises software appliance to cloud-based storage, securely integrating the on-premises environment with AWS storage. The appliance can be deployed as a virtual machine (VM) on VMware, Hyper-V or Linux KVM, or as an Amazon EC2 instance, and there are types such as File Gateway, Volume Gateway and Tape Gateway. This way, on-premises applications keep working without being rewritten while the data lives in the cloud."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "O AWS Elastic Beanstalk simplifica a implantação e o gerenciamento de aplicações web, incluindo aplicações Java, provisionando os recursos necessários para o ambiente. EC2 fornece capacidade computacional, Auto Scaling ajusta a capacidade e Control Tower governa ambientes multi-conta, mas não automatizam sozinhos esse fluxo de implantação da aplicação.",
-      "en": "AWS Elastic Beanstalk simplifies deployment and management of web applications, including Java applications, by provisioning the resources needed for the environment. EC2 provides compute capacity, Auto Scaling adjusts capacity, and Control Tower governs multi-account environments, but they do not by themselves automate this application deployment workflow."
+      "pt-BR": "O AWS Storage Gateway é o serviço híbrido que conecta um appliance local ao armazenamento da AWS, permitindo que as aplicações do data center usem a nuvem sem reescrita. O Snowball Edge move dados offline, o DataSync transfere e sincroniza dados e o Amazon Elastic Block Store (Amazon EBS) é armazenamento em bloco para Amazon EC2; nenhum deles oferece esse acesso contínuo por um appliance local.",
+      "en": "AWS Storage Gateway is the hybrid service that connects an on-premises appliance to AWS storage, letting data center applications use the cloud without being rewritten. Snowball Edge moves data offline, DataSync transfers and synchronizes data and Amazon Elastic Block Store (Amazon EBS) is block storage for Amazon EC2; none of them offers this continuous access through a local appliance."
     }
   },
   {
@@ -6192,8 +6192,8 @@ export const cloudPractitionerQuestions = [
       "en": "IAM and identities"
     },
     "description": {
-      "pt-BR": "Qual prática é recomendada para usuário root AWS?",
-      "en": "Which practice is recommended for the AWS root user?"
+      "pt-BR": "Um usuário do IAM pertence a um grupo cuja política permite excluir objetos de um bucket do Amazon S3, mas outra política aplicada a esse usuário nega explicitamente essa mesma ação. O que acontece quando ele tenta excluir um objeto?",
+      "en": "An IAM user belongs to a group whose policy allows deleting objects from an Amazon S3 bucket, but another policy applied to that user explicitly denies the same action. What happens when the user tries to delete an object?"
     },
     "question": {
       "pt-BR": "",
@@ -6205,52 +6205,52 @@ export const cloudPractitionerQuestions = [
     "alternatives": [
       {
         "title": {
-          "pt-BR": "Não alternar senha",
-          "en": "Do not rotate the password"
+          "pt-BR": "A exclusão é permitida, porque a permissão do grupo prevalece sobre a negação",
+          "en": "The deletion is allowed, because the group permission takes precedence over the deny"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Manter uma senha sem controles fortes não protege a conta; a senha do root deve ser protegida e a MFA deve ser habilitada como uma camada adicional.",
-          "en": "Keeping a password without strong safeguards does not protect the account; the root password should be secured and MFA enabled as an additional layer."
+          "pt-BR": "Não existe prioridade para permissões de grupo. Por padrão, toda requisição é negada implicitamente, uma permissão explícita (allow) libera a ação, e uma negação explícita (deny) em qualquer política aplicável substitui todas as permissões.",
+          "en": "There is no priority for group permissions. By default every request is implicitly denied, an explicit allow permits the action, and an explicit deny in any applicable policy overrides all allows."
         }
       },
       {
         "title": {
-          "pt-BR": "Compartilhar senha com operações",
-          "en": "Share the password with the operations team"
-        },
-        "correct": false,
-        "explanation": {
-          "pt-BR": "Compartilhar a senha do root amplia o número de pessoas com acesso irrestrito e prejudica a responsabilização; cada pessoa deve usar sua própria identidade e permissões apropriadas.",
-          "en": "Sharing the root password gives more people unrestricted access and weakens accountability; each person should use their own identity with appropriate permissions."
-        }
-      },
-      {
-        "title": {
-          "pt-BR": "Ativar autenticação multifator (MFA)",
-          "en": "Enable multi-factor authentication (MFA)"
+          "pt-BR": "A exclusão é negada, porque uma negação explícita sempre se sobrepõe a qualquer permissão",
+          "en": "The deletion is denied, because an explicit deny always overrides any allow"
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "Habilitar MFA adiciona um segundo fator de autenticação e reduz o risco de acesso indevido mesmo se a senha for comprometida.",
-          "en": "Enabling MFA adds a second authentication factor and reduces the risk of unauthorized access even if the password is compromised."
+          "pt-BR": "Na avaliação de políticas do AWS Identity and Access Management (IAM), uma negação explícita (Effect Deny) sobrepõe qualquer permissão, venha ela de uma política do usuário, do grupo ou de outro tipo de política. Por isso a exclusão é negada, mesmo havendo uma permissão no grupo. Isso permite criar restrições firmes, como proibir uma ação sensível independentemente de outras permissões.",
+          "en": "In AWS Identity and Access Management (IAM) policy evaluation, an explicit deny (Effect Deny) overrides any allow, whether it comes from a user policy, a group policy or another policy type. That is why the deletion is denied even though the group has an allow. This makes it possible to create firm restrictions, such as forbidding a sensitive action regardless of other permissions."
         }
       },
       {
         "title": {
-          "pt-BR": "Criar chave de acesso root",
-          "en": "Create a root access key"
+          "pt-BR": "A exclusão é permitida, porque vale a política criada mais recentemente",
+          "en": "The deletion is allowed, because the most recently created policy applies"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "A AWS recomenda não criar chaves de acesso para o usuário root; tarefas programáticas devem usar credenciais temporárias e identidades com privilégios mínimos.",
-          "en": "AWS recommends not creating access keys for the root user; programmatic tasks should use temporary credentials and least-privilege identities."
+          "pt-BR": "A data de criação da política não decide o resultado. A AWS avalia todas as políticas aplicáveis à requisição, e a presença de uma negação explícita é suficiente para negar a ação, independentemente de qual política é mais nova.",
+          "en": "The policy creation date does not decide the outcome. AWS evaluates all policies that apply to the request, and the presence of an explicit deny is enough to deny the action, regardless of which policy is newer."
+        }
+      },
+      {
+        "title": {
+          "pt-BR": "A exclusão é permitida, porque as permissões de grupos são avaliadas primeiro",
+          "en": "The deletion is allowed, because group permissions are evaluated first"
+        },
+        "correct": false,
+        "explanation": {
+          "pt-BR": "Os grupos apenas servem para aplicar permissões a vários usuários de uma vez; não há ordem de avaliação que dê preferência a elas. Todas as políticas aplicáveis são consideradas, e a negação explícita prevalece.",
+          "en": "Groups only serve to apply permissions to several users at once; there is no evaluation order that favors them. All applicable policies are considered, and the explicit deny prevails."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "A prática recomendada é proteger o usuário root com autenticação multifator (MFA), além de evitar seu uso cotidiano e não criar chaves de acesso para ele. Compartilhar a senha ou deixá-la sem controles adequados aumenta o risco de comprometimento da conta.",
-      "en": "The recommended practice is to protect the root user with multi-factor authentication (MFA), while avoiding routine use and not creating access keys for it. Sharing its password or leaving it without appropriate safeguards increases the risk of account compromise."
+      "pt-BR": "Na avaliação de políticas do IAM, toda requisição começa negada por padrão, uma permissão explícita a libera, mas uma negação explícita em qualquer política aplicável sempre prevalece. Por isso o usuário não consegue excluir o objeto, mesmo com a permissão vinda do grupo. Não há prioridade por grupo nem por data de criação da política.",
+      "en": "In IAM policy evaluation, every request is denied by default, an explicit allow permits it, but an explicit deny in any applicable policy always prevails. That is why the user cannot delete the object, even with the permission coming from the group. There is no priority by group or by policy creation date."
     }
   },
   {
@@ -6330,8 +6330,8 @@ export const cloudPractitionerQuestions = [
       "en": "Protection and security"
     },
     "description": {
-      "pt-BR": "Uma empresa precisa bloquear ataques de injeção SQL. Qual recurso?",
-      "en": "A company needs to block SQL injection attacks. Which feature should it use?"
+      "pt-BR": "Uma aplicação precisa acessar um banco de dados, mas a empresa não quer senhas gravadas no código-fonte e deseja que a senha seja trocada automaticamente de tempos em tempos. Qual serviço deve usar?",
+      "en": "An application needs to access a database, but the company does not want passwords hard-coded in the source code and wants the password to be rotated automatically from time to time. Which service should it use?"
     },
     "question": {
       "pt-BR": "",
@@ -6343,52 +6343,52 @@ export const cloudPractitionerQuestions = [
     "alternatives": [
       {
         "title": {
-          "pt-BR": "Security Groups",
-          "en": "Security Groups"
-        },
-        "correct": false,
-        "explanation": {
-          "pt-BR": "Os grupos de segurança controlam o tráfego de rede permitido para recursos, mas não inspecionam o conteúdo das solicitações web para bloquear injeção SQL.",
-          "en": "Security groups control network traffic allowed to resources, but do not inspect web request content to block SQL injection."
-        }
-      },
-      {
-        "title": {
-          "pt-BR": "AWS WAF",
-          "en": "AWS WAF"
+          "pt-BR": "AWS Secrets Manager",
+          "en": "AWS Secrets Manager"
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "O AWS WAF inspeciona solicitações web e aplica regras, inclusive regras gerenciadas para identificar e bloquear padrões de injeção de Linguagem de Consulta Estruturada (SQL).",
-          "en": "AWS WAF inspects web requests and applies rules, including managed rules to identify and block Structured Query Language (SQL) injection patterns."
+          "pt-BR": "O AWS Secrets Manager ajuda a gerenciar, recuperar e rotacionar credenciais de banco de dados, credenciais de aplicações, tokens OAuth, chaves de API e outros segredos durante todo o ciclo de vida. A aplicação substitui a senha gravada no código por uma chamada ao serviço em tempo de execução, e é possível configurar a rotação automática, reduzindo o risco de comprometimento sem precisar atualizar a aplicação.",
+          "en": "AWS Secrets Manager helps you manage, retrieve and rotate database credentials, application credentials, OAuth tokens, API keys and other secrets throughout their lifecycles. The application replaces the hard-coded password with a call to the service at runtime, and automatic rotation can be configured, reducing the risk of compromise without having to update the application."
         }
       },
       {
         "title": {
-          "pt-BR": "AWS Shield",
-          "en": "AWS Shield"
+          "pt-BR": "AWS Key Management Service (AWS KMS)",
+          "en": "AWS Key Management Service (AWS KMS)"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O AWS Shield oferece proteção gerenciada contra ataques DDoS; não é o serviço de filtragem de conteúdo de solicitações web para injeção SQL.",
-          "en": "AWS Shield provides managed protection against DDoS attacks; it is not the service for filtering web request content for SQL injection."
+          "pt-BR": "O AWS Key Management Service (AWS KMS) cria e controla chaves de criptografia. A documentação da AWS o indica para chaves de criptografia, não para armazenar e rotacionar senhas de banco de dados usadas por aplicações.",
+          "en": "AWS Key Management Service (AWS KMS) creates and controls encryption keys. AWS documentation recommends it for encryption keys, not for storing and rotating database passwords used by applications."
         }
       },
       {
         "title": {
-          "pt-BR": "Network ACLs",
-          "en": "Network ACLs"
+          "pt-BR": "AWS Certificate Manager (ACM)",
+          "en": "AWS Certificate Manager (ACM)"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "As Network ACLs aplicam regras de tráfego no nível da sub-rede, sem analisar o conteúdo da aplicação necessário para identificar injeção SQL.",
-          "en": "Network ACLs apply traffic rules at the subnet level without analyzing the application content needed to identify SQL injection."
+          "pt-BR": "O AWS Certificate Manager (ACM) provisiona e gerencia certificados TLS (Transport Layer Security) e chaves privadas associadas. Ele cuida de certificados, não de senhas de banco de dados.",
+          "en": "AWS Certificate Manager (ACM) provisions and manages TLS (Transport Layer Security) certificates and their private keys. It handles certificates, not database passwords."
+        }
+      },
+      {
+        "title": {
+          "pt-BR": "AWS Identity and Access Management (IAM)",
+          "en": "AWS Identity and Access Management (IAM)"
+        },
+        "correct": false,
+        "explanation": {
+          "pt-BR": "O AWS Identity and Access Management (IAM) controla quem acessa recursos da AWS e com quais permissões. É a recomendação para credenciais da AWS, e não o serviço que guarda e rotaciona a senha de um banco de dados.",
+          "en": "AWS Identity and Access Management (IAM) controls who can access AWS resources and with which permissions. It is the recommendation for AWS credentials, not the service that stores and rotates a database password."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "O AWS WAF permite associar regras de inspeção a recursos web e bloquear solicitações que correspondam a padrões de injeção de Linguagem de Consulta Estruturada (SQL). Grupos de segurança e Network ACLs filtram tráfego de rede, enquanto AWS Shield é voltado à proteção contra ataques de negação de serviço distribuída (DDoS).",
-      "en": "AWS WAF lets users attach inspection rules to web resources and block requests that match Structured Query Language (SQL) injection patterns. Security groups and network ACLs filter network traffic, while AWS Shield is designed to protect against distributed denial-of-service (DDoS) attacks."
+      "pt-BR": "O AWS Secrets Manager armazena segredos como senhas de banco de dados e permite rotacioná-los automaticamente, eliminando credenciais fixas no código. O AWS KMS gerencia chaves de criptografia, o ACM gerencia certificados TLS e o IAM controla permissões de acesso à AWS; cada um cobre outro tipo de segredo ou controle.",
+      "en": "AWS Secrets Manager stores secrets such as database passwords and lets you rotate them automatically, eliminating hard-coded credentials. AWS KMS manages encryption keys, ACM manages TLS certificates and IAM controls access permissions to AWS; each one covers a different kind of secret or control."
     }
   },
   {
@@ -7187,12 +7187,12 @@ export const cloudPractitionerQuestions = [
     "id": 104,
     "domain": "security-compliance",
     "title": {
-      "pt-BR": "Armazenamento AWS",
-      "en": "AWS storage"
+      "pt-BR": "Identidade de aplicações",
+      "en": "Application identity"
     },
     "description": {
-      "pt-BR": "Qual serviço encontra dados confidenciais e informações pessoais em objetos S3?",
-      "en": "Which service discovers sensitive data and personally identifiable information in S3 objects?"
+      "pt-BR": "Uma empresa está criando um aplicativo web e móvel e quer adicionar cadastro e login de clientes, inclusive com contas de provedores como Google e Facebook, sem construir e manter um sistema de autenticação próprio. Qual serviço deve usar?",
+      "en": "A company is building a web and mobile app and wants to add customer sign-up and sign-in, including with accounts from providers such as Google and Facebook, without building and maintaining its own authentication system. Which service should it use?"
     },
     "question": {
       "pt-BR": "",
@@ -7204,52 +7204,52 @@ export const cloudPractitionerQuestions = [
     "alternatives": [
       {
         "title": {
-          "pt-BR": "Trusted Advisor",
-          "en": "Trusted Advisor"
+          "pt-BR": "AWS IAM Identity Center",
+          "en": "AWS IAM Identity Center"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O AWS Trusted Advisor verifica recursos e recomendações em áreas como custo, segurança e confiabilidade. Ele não classifica o conteúdo dos objetos S3 para localizar informações pessoais identificáveis.",
-          "en": "AWS Trusted Advisor checks resources and provides recommendations in areas such as cost, security, and reliability. It does not classify S3 object contents to find personally identifiable information."
+          "pt-BR": "O AWS IAM Identity Center oferece acesso centralizado de usuários corporativos (a força de trabalho) a várias contas AWS e aplicações. Ele não é voltado a cadastro e login dos clientes de um aplicativo público.",
+          "en": "AWS IAM Identity Center provides centralized access for corporate users (the workforce) to multiple AWS accounts and applications. It is not aimed at sign-up and sign-in of the customers of a public app."
         }
       },
       {
         "title": {
-          "pt-BR": "GuardDuty",
-          "en": "GuardDuty"
-        },
-        "correct": false,
-        "explanation": {
-          "pt-BR": "O Amazon GuardDuty analisa sinais de ameaças e atividades potencialmente maliciosas na conta e nas cargas de trabalho. Ele não examina objetos S3 para descobrir dados confidenciais como faz o Macie.",
-          "en": "Amazon GuardDuty analyzes threat signals and potentially malicious activity in an account and its workloads. It does not inspect S3 objects to discover sensitive data as Macie does."
-        }
-      },
-      {
-        "title": {
-          "pt-BR": "Amazon Macie",
-          "en": "Amazon Macie"
+          "pt-BR": "Amazon Cognito",
+          "en": "Amazon Cognito"
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "O Amazon Macie usa descoberta e classificação de dados para identificar dados confidenciais em buckets S3, incluindo informações pessoais identificáveis, atendendo diretamente a essa necessidade.",
-          "en": "Amazon Macie uses data discovery and classification to identify sensitive data in S3 buckets, including personally identifiable information, directly meeting this need."
+          "pt-BR": "O Amazon Cognito é uma plataforma de identidade para aplicativos web e móveis: funciona como diretório de usuários, servidor de autenticação e serviço de autorização. Com os user pools, os usuários podem se cadastrar e entrar diretamente ou por provedores sociais, como Google e Apple, e por provedores corporativos. Assim, a empresa não precisa construir nem manter seu próprio sistema de login.",
+          "en": "Amazon Cognito is an identity platform for web and mobile apps: it works as a user directory, an authentication server and an authorization service. With user pools, users can sign up and sign in directly or through social providers, such as Google and Apple, and through enterprise providers. This way, the company does not need to build or maintain its own sign-in system."
         }
       },
       {
         "title": {
-          "pt-BR": "Amazon Inspector",
-          "en": "Amazon Inspector"
+          "pt-BR": "Usuários do IAM",
+          "en": "IAM users"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O Amazon Inspector identifica vulnerabilidades e exposições em workloads compatíveis, como instâncias EC2 e imagens de contêiner. Sua função é avaliar segurança de workloads, não localizar informações pessoais em objetos S3.",
-          "en": "Amazon Inspector identifies vulnerabilities and exposures in supported workloads, such as EC2 instances and container images. Its role is workload security assessment, not locating personal information in S3 objects."
+          "pt-BR": "Usuários do AWS Identity and Access Management (IAM) são identidades dentro de uma conta AWS, pensadas para pessoas e cargas de trabalho que acessam a AWS. Não são adequados para cadastrar e autenticar os clientes de um aplicativo, que podem ser milhares ou milhões.",
+          "en": "AWS Identity and Access Management (IAM) users are identities inside an AWS account, meant for people and workloads that access AWS. They are not suited to registering and authenticating an app's customers, who can number in the thousands or millions."
+        }
+      },
+      {
+        "title": {
+          "pt-BR": "AWS Directory Service",
+          "en": "AWS Directory Service"
+        },
+        "correct": false,
+        "explanation": {
+          "pt-BR": "O AWS Directory Service fornece diretórios gerenciados, como o Microsoft Active Directory, voltados a cargas de trabalho e usuários corporativos. Ele não é um diretório de clientes com cadastro e login para aplicativos web e móveis.",
+          "en": "AWS Directory Service provides managed directories, such as Microsoft Active Directory, aimed at enterprise workloads and users. It is not a customer directory with sign-up and sign-in for web and mobile apps."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "O Amazon Macie descobre e ajuda a proteger dados confidenciais, inclusive informações pessoais identificáveis, em buckets do Amazon Simple Storage Service (Amazon S3). Trusted Advisor avalia práticas recomendadas, GuardDuty detecta ameaças e Inspector avalia vulnerabilidades, mas não são a ferramenta de descoberta de dados confidenciais em objetos S3.",
-      "en": "Amazon Macie discovers and helps protect sensitive data, including personally identifiable information, in Amazon Simple Storage Service (Amazon S3) buckets. Trusted Advisor evaluates best practices, GuardDuty detects threats, and Inspector assesses vulnerabilities, but they are not the tool for discovering sensitive data in S3 objects."
+      "pt-BR": "O Amazon Cognito entrega cadastro, login e autenticação de usuários de aplicativos web e móveis, inclusive com provedores como Google e Facebook, sem que a empresa construa um sistema próprio. O IAM Identity Center atende a força de trabalho, os usuários do IAM são identidades da conta AWS e o AWS Directory Service oferece diretórios corporativos gerenciados.",
+      "en": "Amazon Cognito provides sign-up, sign-in and authentication for web and mobile app users, including with providers such as Google and Facebook, without the company building its own system. IAM Identity Center serves the workforce, IAM users are AWS account identities and AWS Directory Service offers managed enterprise directories."
     }
   },
   {
@@ -7601,12 +7601,12 @@ export const cloudPractitionerQuestions = [
     "id": 110,
     "domain": "security-compliance",
     "title": {
-      "pt-BR": "Armazenamento AWS",
-      "en": "AWS storage"
+      "pt-BR": "Segurança de dados no S3",
+      "en": "S3 data security"
     },
     "description": {
-      "pt-BR": "Qual recurso S3 protege contra exclusões e substituições acidentais?",
-      "en": "Which S3 feature protects against accidental deletions and overwrites?"
+      "pt-BR": "Um desenvolvedor tornou público, por engano, um bucket do Amazon S3 por meio de uma bucket policy. A equipe de segurança quer uma proteção que impeça o acesso público aos buckets da conta, mesmo que alguém altere políticas ou ACLs no futuro. Qual recurso deve usar?",
+      "en": "A developer accidentally made an Amazon S3 bucket public through a bucket policy. The security team wants a safeguard that prevents public access to the account's buckets, even if someone changes policies or ACLs in the future. Which feature should it use?"
     },
     "question": {
       "pt-BR": "",
@@ -7618,52 +7618,52 @@ export const cloudPractitionerQuestions = [
     "alternatives": [
       {
         "title": {
-          "pt-BR": "Criptografia em servidor",
-          "en": "Server-side encryption"
+          "pt-BR": "Criptografia do lado do servidor (SSE)",
+          "en": "Server-side encryption (SSE)"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "A criptografia no servidor protege os dados armazenados contra leitura não autorizada sem a chave apropriada. Ela não preserva versões anteriores quando um objeto é sobrescrito ou excluído.",
-          "en": "Server-side encryption protects stored data from unauthorized reading without the appropriate key. It does not preserve prior versions when an object is overwritten or deleted."
+          "pt-BR": "A criptografia do lado do servidor (SSE, Server-Side Encryption) protege os dados armazenados em repouso. Em um bucket público, o S3 descriptografa o objeto de forma transparente para quem tem permissão de leitura, então ela não impede o acesso público.",
+          "en": "Server-side encryption (SSE) protects stored data at rest. In a public bucket, S3 transparently decrypts the object for anyone with read permission, so it does not prevent public access."
         }
       },
       {
         "title": {
-          "pt-BR": "S3 Access Points",
-          "en": "S3 Access Points"
+          "pt-BR": "Amazon Macie",
+          "en": "Amazon Macie"
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "S3 Access Points fornecem endpoints e políticas de acesso específicos para diferentes aplicações ou equipes. Eles ajudam a controlar o acesso, mas não permitem restaurar versões removidas ou substituídas.",
-          "en": "S3 Access Points provide endpoints and access policies tailored to different applications or teams. They help control access but do not restore deleted or overwritten versions."
+          "pt-BR": "O Amazon Macie descobre e classifica dados sensíveis em buckets S3, como informações pessoais, e alerta sobre riscos. Ele identifica e informa, mas não bloqueia o acesso público aos buckets.",
+          "en": "Amazon Macie discovers and classifies sensitive data in S3 buckets, such as personal information, and alerts about risks. It identifies and reports, but does not block public access to buckets."
         }
       },
       {
         "title": {
-          "pt-BR": "Lifecycle",
-          "en": "Lifecycle"
-        },
-        "correct": false,
-        "explanation": {
-          "pt-BR": "As regras de S3 Lifecycle automatizam ações como transição de objetos entre classes de armazenamento ou expiração. Elas gerenciam o ciclo de vida, não oferecem por si mesmas proteção para recuperar versões anteriores.",
-          "en": "S3 Lifecycle rules automate actions such as transitioning objects between storage classes or expiring them. They manage object lifecycle and do not by themselves protect earlier versions for recovery."
-        }
-      },
-      {
-        "title": {
-          "pt-BR": "S3 Versioning",
-          "en": "S3 Versioning"
+          "pt-BR": "S3 Block Public Access",
+          "en": "S3 Block Public Access"
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "Com o versionamento S3 habilitado, gravações criam versões de objeto e exclusões normalmente inserem um marcador de exclusão, permitindo recuperar versões anteriores. Isso protege contra substituições e exclusões acidentais.",
-          "en": "With S3 Versioning enabled, writes create object versions and deletions typically add a delete marker, allowing earlier versions to be recovered. This protects against accidental overwrites and deletions."
+          "pt-BR": "O S3 Block Public Access oferece configurações, aplicáveis a buckets, à conta inteira ou a toda a organização no AWS Organizations, que se sobrepõem a bucket policies, ACLs (Access Control Lists, listas de controle de acesso) e permissões de objeto que concederiam acesso público. Assim, mesmo que alguém altere uma política por engano, o S3 rejeita o acesso público. A AWS recomenda ativar as quatro configurações no nível da conta.",
+          "en": "S3 Block Public Access provides settings, applicable to buckets, the whole account or an entire organization in AWS Organizations, that override bucket policies, ACLs (Access Control Lists) and object permissions that would grant public access. So even if someone changes a policy by mistake, S3 rejects public access. AWS recommends turning on all four settings at the account level."
+        }
+      },
+      {
+        "title": {
+          "pt-BR": "IAM Access Analyzer para S3",
+          "en": "IAM Access Analyzer for S3"
+        },
+        "correct": false,
+        "explanation": {
+          "pt-BR": "O IAM Access Analyzer para S3 avisa quais buckets estão acessíveis publicamente ou compartilhados com outras contas. Ele é uma ferramenta de detecção e análise: mostra o problema depois que ele existe, mas não impede nem bloqueia o acesso público.",
+          "en": "IAM Access Analyzer for S3 warns which buckets are publicly accessible or shared with other accounts. It is a detection and analysis tool: it shows the problem after it exists, but does not prevent or block public access."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "O versionamento do Amazon Simple Storage Service (Amazon S3) mantém versões distintas de um objeto, permitindo recuperar uma versão anterior após uma substituição ou exclusão acidental. Criptografia protege a confidencialidade, Access Points simplificam o gerenciamento de acesso e Lifecycle automatiza transições ou expirações, mas esses recursos não substituem a recuperação por versões.",
-      "en": "Amazon Simple Storage Service (Amazon S3) Versioning keeps distinct versions of an object, allowing an earlier version to be recovered after an accidental overwrite or deletion. Encryption protects confidentiality, Access Points simplify access management, and Lifecycle automates transitions or expiration, but these features do not replace version-based recovery."
+      "pt-BR": "O S3 Block Public Access é o controle preventivo: impõe, no nível do bucket, da conta ou da organização, o bloqueio de acesso público e prevalece sobre bucket policies, ACLs (Access Control Lists) e permissões de objeto. A criptografia protege o conteúdo, o Amazon Macie apenas classifica dados sensíveis e o IAM Access Analyzer para S3 apenas detecta acessos públicos; nenhum deles impede que o bucket seja exposto.",
+      "en": "S3 Block Public Access is the preventive control: it enforces, at the bucket, account or organization level, a block on public access that takes precedence over bucket policies, ACLs (Access Control Lists) and object permissions. Encryption protects the content, Amazon Macie only classifies sensitive data and IAM Access Analyzer for S3 only detects public access; none of them prevents the bucket from being exposed."
     }
   },
   {
