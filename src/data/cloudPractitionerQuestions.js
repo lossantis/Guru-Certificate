@@ -7053,8 +7053,8 @@ export const cloudPractitionerQuestions = [
       "en": "AWS services and architecture"
     },
     "description": {
-      "pt-BR": "Uma empresa possui licenças baseadas em núcleos físicos e pretende usar o modelo Bring Your Own License (BYOL, traga sua própria licença) no EC2. Qual opção usar?",
-      "en": "A company has licenses based on physical cores and plans to use the Bring Your Own License (BYOL) model on EC2. Which option should it use?"
+      "pt-BR": "Uma empresa possui licenças baseadas em núcleos físicos e pretende usar o modelo BYOL no EC2. Qual opção usar?",
+      "en": "A company has licenses based on physical cores and plans to use the BYOL model on EC2. Which option should it use?"
     },
     "question": {
       "pt-BR": "",
@@ -7082,8 +7082,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Com tenancy default, as instâncias rodam em hardware compartilhado com outros clientes e podem mudar de servidor físico. Não há como contar ou fixar núcleos físicos, então não é possível comprovar a conformidade de licenças BYOL baseadas em núcleos.",
-          "en": "With default tenancy, instances run on hardware shared with other customers and may move between physical servers. You cannot count or pin physical cores, so BYOL compliance for core-based licenses cannot be demonstrated."
+          "pt-BR": "Com tenancy default, as instâncias rodam em hardware compartilhado com outros clientes e podem mudar de servidor físico. Não há como contar ou fixar núcleos físicos, então não é possível comprovar a conformidade de licenças BYOL (Bring Your Own License) baseadas em núcleos.",
+          "en": "With default tenancy, instances run on hardware shared with other customers and may move between physical servers. You cannot count or pin physical cores, so BYOL (Bring Your Own License) compliance for core-based licenses cannot be demonstrated."
         }
       },
       {
@@ -7093,8 +7093,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "Um EC2 Dedicated Host é um servidor físico totalmente dedicado a você. Ele expõe sockets e núcleos físicos e permite manter as instâncias no mesmo servidor, requisitos para usar licenças existentes por socket, núcleo ou VM (BYOL), como Windows Server, SQL Server e Oracle, e comprovar conformidade. Integra-se ao AWS License Manager.",
-          "en": "An EC2 Dedicated Host is a physical server fully dedicated to you. It exposes physical sockets and cores and lets you keep instances on the same server, which is required to use existing per-socket, per-core or per-VM licenses (BYOL) such as Windows Server, SQL Server and Oracle, and to prove compliance. It integrates with AWS License Manager."
+          "pt-BR": "Um EC2 Dedicated Host é um servidor físico totalmente dedicado a você. Ele expõe sockets e núcleos físicos e permite manter as instâncias no mesmo servidor, requisitos para usar licenças existentes por socket, núcleo ou VM (BYOL - Bring Your Own License), como Windows Server, SQL Server e Oracle, e comprovar conformidade. Integra-se ao AWS License Manager.",
+          "en": "An EC2 Dedicated Host is a physical server fully dedicated to you. It exposes physical sockets and cores and lets you keep instances on the same server, which is required to use existing per-socket, per-core or per-VM licenses (BYOL - Bring Your Own License) such as Windows Server, SQL Server and Oracle, and to prove compliance. It integrates with AWS License Manager."
         }
       },
       {
@@ -7104,8 +7104,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "Capacity Reservation apenas garante capacidade de computação em uma zona de disponibilidade. Ela não dedica um servidor físico a você nem expõe sockets/núcleos, portanto não atende requisitos de licenciamento BYOL.",
-          "en": "Capacity Reservation only guarantees compute capacity in an Availability Zone. It does not dedicate a physical server to you or expose sockets/cores, so it does not satisfy BYOL licensing requirements."
+          "pt-BR": "Capacity Reservation apenas garante capacidade de computação em uma zona de disponibilidade. Ela não dedica um servidor físico a você nem expõe sockets/núcleos, portanto não atende requisitos de licenciamento BYOL (Bring Your Own License).",
+          "en": "Capacity Reservation only guarantees compute capacity in an Availability Zone. It does not dedicate a physical server to you or expose sockets/cores, so it does not satisfy BYOL (Bring Your Own License) licensing requirements."
         }
       }
     ],
@@ -7278,8 +7278,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O AWS Application Migration Service replica e migra servidores para a AWS, incluindo seus sistemas e aplicações. Ele não é o serviço voltado à migração e replicação de dados entre bancos usando CDC.",
-          "en": "AWS Application Migration Service replicates and migrates servers to AWS, including their systems and applications. It is not the service intended for migrating and replicating database data with CDC."
+          "pt-BR": "O AWS Application Migration Service replica e migra servidores inteiros para a AWS, incluindo sistemas e aplicações. Ele não é o serviço voltado à migração e à replicação contínua de dados entre bancos usando CDC, que é função do AWS DMS. DMS (Database Migration Service, serviço de migração de banco de dados) é o serviço da AWS que move dados entre bancos de dados. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
+          "en": "AWS Application Migration Service replicates and migrates entire servers to AWS, including their systems and applications. It is not the service intended for migrating and continuously replicating data between databases using CDC, which is the job of AWS DMS. DMS (Database Migration Service) is the AWS service that moves data between databases. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
         }
       },
       {
@@ -7289,8 +7289,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O Migration Evaluator analisa ambientes locais para apoiar decisões e estimativas de migração. Ele não executa a migração nem mantém dados de bancos sincronizados com CDC. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
-          "en": "Migration Evaluator analyzes on-premises environments to support migration decisions and estimates. It does not perform the migration or keep database data synchronized with CDC. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
+          "pt-BR": "O Migration Evaluator analisa ambientes locais para apoiar decisões e estimativas de migração. Ele não executa a migração nem mantém dados de bancos sincronizados com CDC, tarefas do AWS DMS. DMS (Database Migration Service, serviço de migração de banco de dados) é o serviço da AWS que move dados entre bancos de dados. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
+          "en": "Migration Evaluator analyzes on-premises environments to support migration decisions and estimates. It does not perform the migration or keep database data synchronized with CDC, which are jobs for AWS DMS. DMS (Database Migration Service) is the AWS service that moves data between databases. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
         }
       },
       {
@@ -7300,8 +7300,8 @@ export const cloudPractitionerQuestions = [
         },
         "correct": false,
         "explanation": {
-          "pt-BR": "O AWS Schema Conversion Tool ajuda a converter esquemas e código de banco de dados quando há incompatibilidades entre mecanismos. A movimentação e a replicação contínua dos dados são tarefas do AWS DMS.",
-          "en": "AWS Schema Conversion Tool helps convert database schemas and code when engines are incompatible. Moving and continuously replicating the data are tasks for AWS DMS."
+          "pt-BR": "O AWS Schema Conversion Tool ajuda a converter esquemas e código de banco de dados quando há incompatibilidades entre mecanismos. Ele não move os dados nem replica alterações com CDC; isso é tarefa do AWS DMS. DMS (Database Migration Service, serviço de migração de banco de dados) é o serviço da AWS que move dados entre bancos de dados. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
+          "en": "AWS Schema Conversion Tool helps convert database schemas and code when engines are incompatible. It does not move the data or replicate changes with CDC; that is a task for AWS DMS. DMS (Database Migration Service) is the AWS service that moves data between databases. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
         }
       },
       {
@@ -7311,14 +7311,14 @@ export const cloudPractitionerQuestions = [
         },
         "correct": true,
         "explanation": {
-          "pt-BR": "O AWS DMS migra dados entre bancos de dados e usa CDC para capturar alterações feitas na origem enquanto a carga inicial ocorre ou após ela. Isso permite manter um banco RDS de destino atualizado até a transição. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
-          "en": "AWS DMS migrates data between databases and uses CDC to capture changes made at the source during or after the initial load. This can keep an RDS target up to date until cutover. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
+          "pt-BR": "O AWS DMS migra dados entre bancos de dados e usa CDC para capturar alterações feitas na origem durante e após a carga inicial. Isso permite manter o banco de origem em uso e o destino no Amazon RDS atualizado até a transição. DMS (Database Migration Service, serviço de migração de banco de dados) é o serviço da AWS que move dados entre bancos de dados. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
+          "en": "AWS DMS migrates data between databases and uses CDC to capture changes made at the source during and after the initial load. This lets the source database stay in use while the Amazon RDS target is kept up to date until cutover. DMS (Database Migration Service) is the AWS service that moves data between databases. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
         }
       }
     ],
     "explanation": {
-      "pt-BR": "O AWS Database Migration Service (AWS DMS) migra bancos de dados e pode replicar alterações contínuas usando Change Data Capture (CDC), mantendo o destino atualizado durante a migração para o Amazon Relational Database Service (Amazon RDS). Application Migration Service migra servidores, Migration Evaluator avalia ambientes e Schema Conversion Tool converte esquemas; nenhum deles substitui o DMS para replicação de dados com CDC.",
-      "en": "AWS Database Migration Service (AWS DMS) migrates databases and can replicate ongoing changes using Change Data Capture (CDC), keeping the target current during migration to Amazon Relational Database Service (Amazon RDS). Application Migration Service migrates servers, Migration Evaluator assesses environments, and Schema Conversion Tool converts schemas; none replaces DMS for data replication with CDC."
+      "pt-BR": "O AWS Database Migration Service (AWS DMS) migra bancos de dados e pode replicar alterações contínuas usando Change Data Capture (CDC), mantendo o destino atualizado durante a migração para o Amazon Relational Database Service (Amazon RDS). Application Migration Service migra servidores, Migration Evaluator avalia ambientes e Schema Conversion Tool converte esquemas; nenhum deles substitui o DMS para replicação de dados com CDC. DMS (Database Migration Service, serviço de migração de banco de dados) é o serviço da AWS que move dados entre bancos de dados. CDC (Change Data Capture, captura de dados de alteração) é a técnica que identifica e replica continuamente as mudanças feitas no banco de origem.",
+      "en": "AWS Database Migration Service (AWS DMS) migrates databases and can replicate ongoing changes using Change Data Capture (CDC), keeping the target current during migration to Amazon Relational Database Service (Amazon RDS). Application Migration Service migrates servers, Migration Evaluator assesses environments, and Schema Conversion Tool converts schemas; none replaces DMS for data replication with CDC. DMS (Database Migration Service) is the AWS service that moves data between databases. CDC (Change Data Capture) is the technique that identifies and continuously replicates the changes made to the source database."
     }
   },
   {
