@@ -392,12 +392,12 @@ const CloudPractitioner = () => {
     const percentage = (correctAnswers / totalQuestions) * 100;
     const passed = percentage >= 70;
 
-    // Identificar questões erradas ou não respondidas e seus tópicos
+    // Identificar questões respondidas incorretamente (não respondidas só reduzem a nota) e seus tópicos
     const wrongQuestionIds = [];
     const topics = new Set();
 
     examQuestions.forEach((question, questionIndex) => {
-      if (!answeredQuestions[questionIndex]) {
+      if (lockedQuestions[questionIndex] && !answeredQuestions[questionIndex]) {
         wrongQuestionIds.push(question.id);
 
         // Extrair tópico do título
@@ -430,7 +430,7 @@ const CloudPractitioner = () => {
     }
     
     setIsFinished(true);
-  }, [answeredQuestions, examQuestions]);
+  }, [answeredQuestions, lockedQuestions, examQuestions]);
 
   // Timer effect
   useEffect(() => {

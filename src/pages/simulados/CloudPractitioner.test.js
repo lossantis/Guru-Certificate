@@ -6,10 +6,16 @@ import CloudPractitioner from './CloudPractitioner';
 import CloudPractitionerDomainSession from './CloudPractitionerDomainSession';
 import { cloudPractitionerQuestions } from '../../data/cloudPractitionerQuestions';
 import { createCloudPractitionerExam } from '../../data/cloudPractitionerExam';
+import { getCurrentUser, saveExamResult } from '../../services/apiService';
 
 jest.mock('../../components/ExamProtection', () => ({ children }) => children);
 jest.mock('../../data/cloudPractitionerExam', () => ({
   createCloudPractitionerExam: jest.fn()
+}));
+
+jest.mock('../../services/apiService', () => ({
+  getCurrentUser: jest.fn(),
+  saveExamResult: jest.fn()
 }));
 
 const originalQuestions = cloudPractitionerQuestions.slice();
@@ -83,6 +89,8 @@ beforeEach(() => {
     multipleQuestion
   );
   createCloudPractitionerExam.mockReturnValue([singleQuestion, multipleQuestion]);
+  getCurrentUser.mockReturnValue({ id: 'student' });
+  saveExamResult.mockResolvedValue();
 });
 
 afterEach(() => {
@@ -181,4 +189,18 @@ test.each([
   expect(screen.getByText('✗ Incorreto')).toBeInTheDocument();
   fireEvent.click(screen.getByRole('button', { name: 'Finalizar' }));
   expect(screen.getByText('Você acertou 1 de 2 questões (50.0%)')).toBeInTheDocument();
+});
+
+test('questões não respondidas reduzem a nota mas não entram na lista de erradas', () => {
+  renderFullExam();
+
+  fireEvent.click(screen.getByText('Resposta única incorreta'));
+  fireEvent.click(screen.getByRole('button', { name: 'Finalizar Agora' }));
+
+  expect(screen.getByText('Você acertou 0 de 2 questões')).toBeInTheDocument();
+  expect(saveExamResult).toHaveBeenCalledWith(
+    'student',
+    'cloud-practitioner',
+    expect.objectContaining({ correct: 0, total: 2, wrongQuestions: [1] })
+  );
 });
